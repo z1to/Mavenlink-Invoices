@@ -4,11 +4,11 @@
   "description": "Task tracker",
   "main": "index.js",
   "scripts": {
-    "start": "npx ts-node app.ts",
-    "dev": "nodemon app.ts",
+    "start": "npx ts-node src/app.ts",
+    "dev": "nodemon src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint './*.ts'",
-    "lint-fix": "eslint --fix './*.ts'"
+    "lint": "eslint './src/*.ts'",
+    "lint-fix": "eslint --fix './src/*.ts'"
   },
   "repository": {
     "type": "git",
