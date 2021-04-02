@@ -4,9 +4,24 @@ Task Tracker that builds custom reports/invoices for Mavenlink workspaces.
 
 # Structure
 
+└── client: Client. A VueJS & TypeScript application.
 └── service: API. A Node, Express & TypeScript application.
 
 # Setup
+
+## Client
+
+1. Access the `client/` directory.
+
+```
+cd ~/MavenlinkReportBuilder/client
+```
+
+2. Install npm packages
+
+```
+npm install
+```
 
 ## Service
 
@@ -23,6 +38,19 @@ npm install
 ```
 
 # Running the Project
+
+## Client
+
+To use the following scripts, do:
+
+```
+npm run <command>
+```
+
+List of commands:
+- `serve`: Start the application
+- `build`: Build the application
+- `lint`: Run eslint and let it fix the errors
 
 ## Service
 
