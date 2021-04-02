@@ -1,0 +1,31 @@
+{
+  "name": "mavenlinkreportbuilder",
+  "version": "1.0.0",
+  "description": "Task tracker",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx ts-node app.ts",
+    "dev": "nodemon app.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/z1to/MavenlinkReportBuilder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/z1to/MavenlinkReportBuilder/issues"
+  },
+  "homepage": "https://github.com/z1to/MavenlinkReportBuilder#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.11",
+    "@types/node": "^14.14.37",
+    "nodemon": "^2.0.7",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
