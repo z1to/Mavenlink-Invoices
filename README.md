@@ -4,8 +4,10 @@ Task Tracker that builds custom reports/invoices for Mavenlink workspaces.
 
 # Structure
 
+```
 └── client: Client. A VueJS & TypeScript application.
 └── service: API. A Node, Express & TypeScript application.
+```
 
 # Setup
 
