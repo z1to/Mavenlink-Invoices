@@ -1,6 +1,7 @@
 import express from 'express'
-import mongoose from 'mongoose';
-import { IUser, User } from './models/user'
+import mongoose from 'mongoose'
+
+import { register } from './api/users'
 
 const app = express()
 const port = 5000
@@ -12,32 +13,24 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 // Connect to database
-mongoose.connect('mongodb://localhost/task_tracker', {
-  useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost/task_tracker', { useNewUrlParser: true, useUnifiedTopology: true })
 
 // Open connection to database
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
+const db = mongoose.connection
+db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', function () {
-  console.log("Connected successfully to db");
-});
+  console.log('Connected successfully to db')
+})
 
-(async function() {
-  try {
-    const user: IUser = await User.create({
-      name: 'Bill',
-    });
+// Routes
+app.post('/register', (req: express.Request, res: express.Response) => {
+  const message = register(req)
+  return res.send(message)
+})
 
-    console.log('Done', user.name);
-
-    const findUser: IUser = await User.findOne({ name: 'Bill' });
-
-    console.log('Found', findUser.name)
-  }
-  catch(e) {
-    console.error(e);
-  }
-})();
+app.post('/login', (req: express.Request, res: express.Response) => {
+  return res.send('Received a POST HTTP method')
+})
 
 // Start service
 app.listen(port, () => {
