@@ -12,20 +12,26 @@ app.use(express.urlencoded({ extended: true }))
 // Parse application/json
 app.use(express.json())
 
-// Connect to database
-mongoose.connect('mongodb://localhost/task_tracker', { useNewUrlParser: true, useUnifiedTopology: true })
+// Mongoose setup
+mongoose.connect('mongodb://localhost/task_tracker', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.set('useCreateIndex', true);
 
 // Open connection to database
 const db = mongoose.connection
-db.on('error', console.error.bind(console, 'connection error:'))
-db.once('open', function () {
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
   console.log('Connected successfully to db')
 })
 
 // Routes
 app.post('/register', (req: express.Request, res: express.Response) => {
-  const message = register(req)
-  return res.send(message)
+  register(req)
+    .then((message) => {
+      return res.status(200).send({ message: message })
+    })
+    .catch((error) => {
+      return res.status(400).send({ message: error })
+    })
 })
 
 app.post('/login', (req: express.Request, res: express.Response) => {

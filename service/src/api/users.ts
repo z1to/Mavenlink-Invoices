@@ -4,7 +4,7 @@ import { IUser, User } from '../models/user'
 
 import saltHashPassword from '../helpers/password'
 
-export async function register(req: express.Request) {
+export async function register(req: express.Request): Promise<String> {
   try {
     // Parse req body
     const name: String = req.body.name;
@@ -27,6 +27,8 @@ export async function register(req: express.Request) {
       salt: saltHash.salt,
       mavenlinkUsername: mavenlinkUsername
     });
+
+    return 'Success'
   }
   catch(e) {
     throw new Error('User registration could not be processed');
