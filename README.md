@@ -27,6 +27,18 @@ npm install
 
 ## Service
 
+### Database
+
+1. Install and set up MongoDB. [Follow their guides](https://docs.mongodb.com/manual/administration/install-community/) for your operating system.
+
+2. When the installation process is done, open the MongoDB shell in your terminal.
+
+```
+mongo
+```
+
+### API
+
 1. Access the `service/` directory.
 
 ```
