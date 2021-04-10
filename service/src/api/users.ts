@@ -1,4 +1,5 @@
 import express from 'express'
+import jwt from 'jsonwebtoken'
 
 import { IUser, User, saltHashPassword, isPasswordValid } from '../models/user'
 
@@ -17,7 +18,7 @@ export async function register(req: express.Request): Promise<string> {
 
     // Check Mavenlink username has not been registered before
     if (findUser !== null) {
-      return 'User could not be created. Mavenlink username is already in use.'
+      throw new Error('User could not be created. Mavenlink username is already in use.')
     }
 
     // Salt and hash password
@@ -33,8 +34,6 @@ export async function register(req: express.Request): Promise<string> {
       salt: saltHash.salt,
       mavenlinkUsername: mavenlinkUsername
     });
-
-    // TODO: Return token
 
     return 'Success'
   }
@@ -52,17 +51,25 @@ export async function login(req: express.Request): Promise<string> {
     const findUser: IUser = await User.findOne({ mavenlinkUsername: mavenlinkUsername }).exec();
 
     if (findUser == null) {
-      return 'User not found'
+      throw new Error('User not found');
     }
 
     const hashedPassword = findUser.password.toString()
     const salt = findUser.salt.toString()
 
     if (isPasswordValid(password.toString(), hashedPassword, salt)) {
-      return 'Success'
+      // Generate bearer token
+      // TODO: change 'test' secret. Use dotenv
+      const token = jwt.sign(
+                      { mavenlinkUsername: findUser.mavenlinkUsername },
+                      'test',
+                      { expiresIn: '1h' },
+                    );
+
+      return token
     }
 
-    return 'Password is not valid'
+    throw new Error('Invalid password');
   }
   catch(e) {
     throw new Error('User login could not be processed');

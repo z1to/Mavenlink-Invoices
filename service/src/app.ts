@@ -1,6 +1,7 @@
-import express from 'express'
+import express, { json } from 'express'
 import mongoose from 'mongoose'
 import helmet from 'helmet'
+import jwt from 'jsonwebtoken'
 
 import { login, register } from './api/users'
 
@@ -43,12 +44,35 @@ app.post('/register', (req: express.Request, res: express.Response) => {
 app.post('/login', (req: express.Request, res: express.Response) => {
   login(req)
     .then((message) => {
-      return res.status(200).send({ message: message })
+      return res.status(200).send({ token: message })
     })
     .catch((error) => {
       return res.status(400).send({ message: error })
     })
 })
+
+app.get('/auth-test', (req: express.Request, res: express.Response) => {
+  // TODO: move this logic to its own function
+  let token = req.headers.authorization;
+  if (token == null) {
+    const payload = {
+      'error': 'Missing token'
+    }
+
+    return res.status(400).send(payload)
+  }
+
+  // Remover 'Bearer ' from string
+  token = token.replace('Bearer ', '')
+
+  try {
+    const decoded = jwt.verify(token, 'test');
+
+    return res.status(200).send(token)
+  } catch(err) {
+    return res.status(403).send(err)
+  }
+});
 
 // Start service
 app.listen(port, () => {

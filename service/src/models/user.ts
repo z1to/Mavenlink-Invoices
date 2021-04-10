@@ -1,5 +1,5 @@
 import { model, Schema, Model, Document } from 'mongoose';
-import { createHmac, pbkdf2Sync, randomBytes } from 'crypto'
+import { createHmac, randomBytes } from 'crypto'
 
 export interface IUser extends Document {
   name: String,
