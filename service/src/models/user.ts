@@ -47,6 +47,7 @@ export const User: Model<IUser> = model('User', userSchema);
 
 // Functions
 // Resource: https://ciphertrick.com/salt-hash-passwords-using-nodejs-crypto/
+// Resource: https://www.loginradius.com/blog/async/password-hashing-with-nodejs/
 
 /**
  * Generates random string of characters i.e salt

@@ -1,5 +1,6 @@
 import express from 'express'
 import mongoose from 'mongoose'
+import helmet from 'helmet'
 
 import { login, register } from './api/users'
 
@@ -12,13 +13,16 @@ app.use(express.urlencoded({ extended: true }))
 // Parse application/json
 app.use(express.json())
 
+// Enhance API's security
+app.use(helmet());
+
 // Mongoose setup
-mongoose.connect('mongodb://localhost/task_tracker', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.set('useCreateIndex', true);
+mongoose.connect('mongodb://localhost/task_tracker', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.set('useCreateIndex', true)
 
 // Open connection to database
 const db = mongoose.connection
-db.on('error', console.error.bind(console, 'connection error:'));
+db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', () => {
   console.log('Connected successfully to db')
 })
