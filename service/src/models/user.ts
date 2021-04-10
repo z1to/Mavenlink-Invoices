@@ -6,6 +6,7 @@ interface IUser extends Document {
   phone: String,
   email: String,
   password: String,
+  salt: String,
   mavenlinkUsername: String
 }
 
@@ -15,6 +16,7 @@ const userSchema: Schema = new Schema({
   phone: String,
   email: String,
   password: String,
+  salt: String,
   mavenlinkUsername: String
 });
 
