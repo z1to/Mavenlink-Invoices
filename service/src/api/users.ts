@@ -1,21 +1,19 @@
 import express from 'express'
 
-import { IUser, User } from '../models/user'
+import { IUser, User, saltHashPassword, isPasswordValid } from '../models/user'
 
-import saltHashPassword from '../helpers/password'
-
-export async function register(req: express.Request): Promise<String> {
+export async function register(req: express.Request): Promise<string> {
   try {
     // Parse req body
-    const name: String = req.body.name;
-    const address: String = req.body.address;
-    const phone: String = req.body.phone;
-    const email: String = req.body.email;
-    const password: String = req.body.password;
-    const mavenlinkUsername: String = req.body.mavenlinkUsername;
+    const name: string = req.body.name;
+    const address: string = req.body.address;
+    const phone: string = req.body.phone;
+    const email: string = req.body.email;
+    const password: string = req.body.password;
+    const mavenlinkUsername: string = req.body.mavenlinkUsername;
 
     // Salt and hash password
-    const saltHash = saltHashPassword(password.toString())
+    const saltHash = saltHashPassword(password)
 
     // Create user
     const user: IUser = await User.create({
@@ -35,6 +33,29 @@ export async function register(req: express.Request): Promise<String> {
   }
 }
 
-export async function login(req) {
-  const findUser: IUser = await User.findOne({ name: 'Bill' });
+export async function login(req: express.Request): Promise<string> {
+  try {
+    const mavenlinkUsername: string = req.body.mavenlinkUsername;
+    const password: string = req.body.password;
+
+    // Find user
+    const findUser: IUser = await User.findOne({ mavenlinkUsername: mavenlinkUsername }).exec();
+
+    if(findUser == null) {
+      return 'User not found'
+    }
+
+    const hashedPassword = findUser.password.toString()
+    const salt = findUser.salt.toString()
+
+    if (isPasswordValid(password.toString(), hashedPassword, salt)) {
+      // TODO: Return token
+      return 'Success'
+    }
+
+    return 'Password is not valid'
+  }
+  catch(e) {
+    throw new Error('User login could not be processed');
+  }
 }

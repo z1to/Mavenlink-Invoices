@@ -1,7 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 
-import { register } from './api/users'
+import { login, register } from './api/users'
 
 const app = express()
 const port = 5000
@@ -23,6 +23,8 @@ db.once('open', () => {
   console.log('Connected successfully to db')
 })
 
+// TODO: Move routes to their own module
+
 // Routes
 app.post('/register', (req: express.Request, res: express.Response) => {
   register(req)
@@ -35,7 +37,13 @@ app.post('/register', (req: express.Request, res: express.Response) => {
 })
 
 app.post('/login', (req: express.Request, res: express.Response) => {
-  return res.send('Received a POST HTTP method')
+  login(req)
+    .then((message) => {
+      return res.status(200).send({ message: message })
+    })
+    .catch((error) => {
+      return res.status(400).send({ message: error })
+    })
 })
 
 // Start service
