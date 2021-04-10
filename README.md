@@ -51,6 +51,16 @@ cd ~/MavenlinkReportBuilder/service
 npm install
 ```
 
+### Environment Variables
+
+1. Open `~/MavenlinkReportBuilder/service/.env.template`
+
+2. Create a file in `~/service` called `.env`
+
+3. Paste the content you copied from `.env.template` in `.env`
+
+4. Fill the keys with the secret values
+
 # Running the Project
 
 ## Client

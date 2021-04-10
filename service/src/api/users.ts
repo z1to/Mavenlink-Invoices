@@ -37,7 +37,7 @@ export async function register(req: express.Request): Promise<string> {
 
     return 'Success'
   }
-  catch(e) {
+  catch(error) {
     throw new Error('User registration could not be processed');
   }
 }
@@ -59,10 +59,9 @@ export async function login(req: express.Request): Promise<string> {
 
     if (isPasswordValid(password.toString(), hashedPassword, salt)) {
       // Generate bearer token
-      // TODO: change 'test' secret. Use dotenv
       const token = jwt.sign(
                       { mavenlinkUsername: findUser.mavenlinkUsername },
-                      'test',
+                      process.env.jwtSecret,
                       { expiresIn: '1h' },
                     );
 
@@ -71,7 +70,7 @@ export async function login(req: express.Request): Promise<string> {
 
     throw new Error('Invalid password');
   }
-  catch(e) {
+  catch(error) {
     throw new Error('User login could not be processed');
   }
 }

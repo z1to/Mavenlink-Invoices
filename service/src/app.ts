@@ -2,6 +2,7 @@ import express, { json } from 'express'
 import mongoose from 'mongoose'
 import helmet from 'helmet'
 import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
 
 import { login, register } from './api/users'
 
@@ -16,6 +17,9 @@ app.use(express.json())
 
 // Enhance API's security
 app.use(helmet());
+
+// Initialize dotenv
+dotenv.config()
 
 // Mongoose setup
 mongoose.connect('mongodb://localhost/task_tracker', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -66,7 +70,7 @@ app.get('/auth-test', (req: express.Request, res: express.Response) => {
   token = token.replace('Bearer ', '')
 
   try {
-    const decoded = jwt.verify(token, 'test');
+    jwt.verify(token, process.env.jwtSecret);
 
     return res.status(200).send(token)
   } catch(err) {
