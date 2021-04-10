@@ -12,6 +12,14 @@ export async function register(req: express.Request): Promise<string> {
     const password: string = req.body.password;
     const mavenlinkUsername: string = req.body.mavenlinkUsername;
 
+    // Find user
+    const findUser: IUser = await User.findOne({ mavenlinkUsername: mavenlinkUsername }).exec();
+
+    // Check Mavenlink username has not been registered before
+    if (findUser !== null) {
+      return 'User could not be created. Mavenlink username is already in use.'
+    }
+
     // Salt and hash password
     const saltHash = saltHashPassword(password)
 
@@ -25,6 +33,8 @@ export async function register(req: express.Request): Promise<string> {
       salt: saltHash.salt,
       mavenlinkUsername: mavenlinkUsername
     });
+
+    // TODO: Return token
 
     return 'Success'
   }
@@ -41,7 +51,7 @@ export async function login(req: express.Request): Promise<string> {
     // Find user
     const findUser: IUser = await User.findOne({ mavenlinkUsername: mavenlinkUsername }).exec();
 
-    if(findUser == null) {
+    if (findUser == null) {
       return 'User not found'
     }
 
@@ -49,7 +59,6 @@ export async function login(req: express.Request): Promise<string> {
     const salt = findUser.salt.toString()
 
     if (isPasswordValid(password.toString(), hashedPassword, salt)) {
-      // TODO: Return token
       return 'Success'
     }
 
