@@ -19,7 +19,7 @@ export const register = (app: express.Application) => {
     });
 
     //Create a task in Mavenlink
-    app.get("/task/create", async (req, res) => {
+    app.post("/tasks/create", async (req, res) => {
         const options = {
             headers:{
                 Authorization: "Bearer " + process.env.MAVENLINK_TOKEN
@@ -35,7 +35,7 @@ export const register = (app: express.Application) => {
     });
 
     //Update task in Mavenlink
-    app.get("/task/update", async (req, res) => {
+    app.put("/tasks/update", async (req, res) => {
         const options = {
             headers:{
                 Authorization: "Bearer " + process.env.MAVENLINK_TOKEN
@@ -48,7 +48,7 @@ export const register = (app: express.Application) => {
 
 
     //Delete a task in Mavenlink
-    app.get("/task/delete", async (req, res) => {
+    app.delete("/tasks/delete", async (req, res) => {
         const options = {
             headers:{
                 Authorization: "Bearer " + process.env.MAVENLINK_TOKEN
