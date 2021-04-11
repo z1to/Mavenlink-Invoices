@@ -1,5 +1,12 @@
+import jwt from 'jsonwebtoken';
+import express from 'express'
 import { model, Schema, Model, Document } from 'mongoose';
-import { createHmac, randomBytes } from 'crypto'
+import { createHmac, randomBytes } from 'crypto';
+
+/* Resources used:
+ * https://ciphertrick.com/salt-hash-passwords-using-nodejs-crypto/
+ * https://www.loginradius.com/blog/async/password-hashing-with-nodejs/
+ */
 
 export interface IUser extends Document {
   name: String,
@@ -44,10 +51,6 @@ const userSchema: Schema = new Schema({
   }
 });
 export const User: Model<IUser> = model('User', userSchema);
-
-// Functions
-// Resource: https://ciphertrick.com/salt-hash-passwords-using-nodejs-crypto/
-// Resource: https://www.loginradius.com/blog/async/password-hashing-with-nodejs/
 
 /**
  * Generates random string of characters i.e salt
@@ -97,3 +100,24 @@ export function isPasswordValid(password: string, hashedPassword: string, salt: 
 
   return hashedPassword === sha.passwordHash;
 };
+
+/**
+* Validate bearer token.
+* @function
+* @param {string} authorization - Received bearer authorization token
+* @param {express.Response} res - Express response from API call
+*/
+export function validateBearerToken(authorization: string, res: express.Response) {
+  if (authorization == null) {
+    res.status(400).send({ message: 'Missing token' })
+  }
+
+  // Remove 'Bearer ' from string
+  const token = authorization.replace('Bearer ', '')
+
+  try {
+    jwt.verify(token, process.env.jwtSecret);
+  } catch(error) {
+    res.status(403).send(error)
+  }
+}

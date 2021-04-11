@@ -5,8 +5,12 @@ import dotenv from 'dotenv'
 
 import routes from './routes'
 
+// Initialize dotenv
+dotenv.config()
+
+// Initialize express app
 const app = express()
-const port = 5000
+const port = process.env.port
 
 // Parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }))
@@ -17,12 +21,9 @@ app.use(express.json())
 // Enhance API's security
 app.use(helmet());
 
-// Initialize dotenv
-dotenv.config()
-
 // TODO: Authenticate db
 // Mongoose setup
-mongoose.connect('mongodb://localhost/task_tracker', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost/' + process.env.db, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.set('useCreateIndex', true)
 
 // Open connection to database
