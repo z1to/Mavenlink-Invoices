@@ -59,4 +59,22 @@ export const register = (app: express.Application) => {
         .catch(error => console.log(error)); 
     });
 
+    //Get time entries from Mavenlink
+    app.get("/time", async (req, res) => {
+        console.log(req.params);
+        /*
+        const options = {
+            headers:{
+                Authorization: "Bearer " + process.env.MAVENLINK_TOKEN
+            }
+        };
+        const url = process.env.MAVENLINK_TIME_URL;
+        axios.get(url, options)
+        .then(response => {
+            console.log(response.data.time_entries);
+        })
+        .catch(error => console.log(error));
+        */
+    });
+
 }
