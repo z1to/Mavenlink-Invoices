@@ -18,7 +18,7 @@ export async function register(req: express.Request): Promise<string> {
 
     // Check Mavenlink username has not been registered before
     if (findUser !== null) {
-      throw new Error('User could not be created. Mavenlink username is already in use.')
+      return 'User could not be created. Mavenlink username is already in use.'
     }
 
     // Salt and hash password
@@ -51,7 +51,7 @@ export async function login(req: express.Request): Promise<string> {
     const findUser: IUser = await User.findOne({ mavenlinkUsername: mavenlinkUsername }).exec();
 
     if (findUser == null) {
-      throw new Error('User not found');
+      return 'User not found';
     }
 
     const hashedPassword = findUser.password.toString()
@@ -68,7 +68,7 @@ export async function login(req: express.Request): Promise<string> {
       return token
     }
 
-    throw new Error('Invalid password');
+    return 'Invalid password';
   }
   catch(error) {
     throw new Error('User login could not be processed');

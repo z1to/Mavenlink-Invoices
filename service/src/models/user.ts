@@ -54,7 +54,7 @@ export const User: Model<IUser> = model('User', userSchema);
  * @function
  * @param {number} length - Length of the random string.
  */
- function genRandomString(length: number) {
+function genRandomString(length: number) {
   return randomBytes(Math.ceil(length / 2))
           .toString('hex')    // Convert to hexadecimal format
           .slice(0, length);  // Return required number of characters
