@@ -19,7 +19,7 @@ Task Tracker that builds custom reports/invoices for Mavenlink workspaces.
 cd ~/MavenlinkReportBuilder/client
 ```
 
-2. Install npm packages
+2. Install npm packages.
 
 ```
 npm install
@@ -31,10 +31,66 @@ npm install
 
 1. Install and set up MongoDB. [Follow their guides](https://docs.mongodb.com/manual/administration/install-community/) for your operating system.
 
-2. When the installation process is done, open the MongoDB shell in your terminal.
+2. Start MongoDB without access control.
+
+For Homebrew:
+```
+sudo mongod --port 27017 --dbpath /usr/local/var/mongodb
+```
+
+3. Open a new tab in your Terminal and start a mongo instance
 
 ```
-mongo
+mongo --port 27017
+```
+
+4. Switch to admin database and create admin user.
+
+```
+use admin
+db.createUser(
+  {
+    user: "superAdmin",
+    pwd: passwordPrompt(),
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
+  }
+)
+```
+
+5. Shut down the mongod instance followed by the mongo shell.
+
+```
+db.adminCommand( { shutdown: 1 } )
+exit
+```
+
+6. Open your MongoDB configuration file.
+
+For macOS Intel:
+```
+open /usr/local/etc/mongod.conf -a TextEdit
+```
+
+Find the path for your OS [here](https://docs.mongodb.com/manual/reference/configuration-options/).
+
+7. Add the following to the config file:
+
+```
+security:
+    authorization: enabled
+```
+
+8. Go back to your first Terminal tab and start MongoDB using your new configuration file.
+
+For Homebrew:
+```
+sudo mongod --config /usr/local/etc/mongod.conf
+```
+
+9. Switch to your second tab in the Terminal and start a mongo shell with authentication.
+
+```
+mongo --port 27017  --authenticationDatabase "admin" -u "superAdmin" -p
 ```
 
 ### API
@@ -45,7 +101,7 @@ mongo
 cd ~/MavenlinkReportBuilder/service
 ```
 
-2. Install npm packages
+2. Install npm packages.
 
 ```
 npm install
@@ -53,19 +109,19 @@ npm install
 
 ### Environment Variables
 
-1. Open `~/MavenlinkReportBuilder/service/.env.template`
+1. Open `~/MavenlinkReportBuilder/service/.env.template`.
 
-2. Create a file in `~/service` called `.env`
+2. Create a file in `~/service` called `.env`.
 
-3. Paste the content you copied from `.env.template` in `.env`
+3. Paste the content you copied from `.env.template` in `.env`.
 
-4. Fill the keys with the secret values
+4. Fill the keys with the secret values.
 
 # Running the Project
 
 ## Client
 
-To use the following scripts, do:
+To use the following commands, do:
 
 ```
 npm run <command>
@@ -78,7 +134,14 @@ List of commands:
 
 ## Service
 
-To use the following scripts, do:
+1. Open a Terminal tab and start MongoDB with the configuration file you had set up.
+
+For Homebrew:
+```
+sudo mongod --config /usr/local/etc/mongod.conf
+```
+
+2. To use the following commands, do:
 
 ```
 npm run <command>

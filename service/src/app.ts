@@ -21,9 +21,13 @@ app.use(express.json())
 // Enhance API's security
 app.use(helmet());
 
-// TODO: Authenticate db
 // Mongoose setup
-mongoose.connect('mongodb://localhost/' + process.env.db, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost/' + process.env.db + '?authSource=admin',
+  { useNewUrlParser: true,
+    useUnifiedTopology: true,
+    user: process.env.dbUser,
+    pass: process.env.dbPassword
+  })
 mongoose.set('useCreateIndex', true)
 
 // Open connection to database
