@@ -13,7 +13,7 @@ export const register = (app: express.Application) => {
         };
         axios.get(process.env.MAVENLINK_TASK_URL, options)
         .then(response => {
-            console.log(response.data.stories);
+            res.status(200).send(response.data.stories);
         })
         .catch(error => console.log(error));
     });
