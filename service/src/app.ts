@@ -10,7 +10,7 @@ dotenv.config()
 
 // Initialize express app
 const app = express()
-const port = process.env.port
+const port = process.env.PORT
 
 // Parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }))
@@ -19,14 +19,15 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 // Enhance API's security
-app.use(helmet());
+app.use(helmet())
 
 // Mongoose setup
-mongoose.connect('mongodb://localhost/' + process.env.db + '?authSource=admin',
-  { useNewUrlParser: true,
+mongoose.connect('mongodb://localhost/' + process.env.DB + '?authSource=admin',
+  {
+    useNewUrlParser: true,
     useUnifiedTopology: true,
-    user: process.env.dbUser,
-    pass: process.env.dbPassword
+    user: process.env.DBUSER,
+    pass: process.env.DBPASSWORD
   })
 mongoose.set('useCreateIndex', true)
 
@@ -39,6 +40,7 @@ db.once('open', () => {
 
 // Add routes
 app.use('/', routes.user)
+app.use('/', routes.task)
 
 // Start service
 app.listen(port, () => {

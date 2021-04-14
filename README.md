@@ -152,3 +152,17 @@ List of commands:
 - `dev`: Start the application with nodemon
 - `lint`: Run eslint
 - `lint-fix`: Run eslint and let it fix the errors
+
+# Filling out .env file
+
+Add environment-specific variables on new lines in the form of NAME=VALUE. For example:
+```
+DB_HOST=localhost
+DB_USER=root
+DB_PASS=s1mpl3
+```
+To access variables use ```process.env.DB_HOST``` for example. 
+
+This is a shell file so there can't be spaces around = 
+
+For more information refer to: https://www.npmjs.com/package/dotenv
