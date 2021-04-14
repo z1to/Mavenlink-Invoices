@@ -39,8 +39,7 @@ db.once('open', () => {
 })
 
 // Add routes
-app.use('/', routes.user)
-app.use('/', routes.task)
+routes(app)
 
 // Start service
 app.listen(port, () => {

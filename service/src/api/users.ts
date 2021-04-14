@@ -61,7 +61,7 @@ export async function login(req: express.Request): Promise<string> {
       // Generate bearer token
       const token = jwt.sign(
                       { mavenlinkUsername: findUser.mavenlinkUsername },
-                      process.env.jwtSecret,
+                      process.env.JWTSECRET,
                       { expiresIn: '1h' },
                     );
 

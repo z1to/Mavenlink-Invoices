@@ -116,7 +116,7 @@ export function validateBearerToken(authorization: string, res: express.Response
   const token = authorization.replace('Bearer ', '')
 
   try {
-    jwt.verify(token, process.env.jwtSecret);
+    jwt.verify(token, process.env.JWTSECRET);
   } catch(error) {
     res.status(403).send(error)
   }
