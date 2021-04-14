@@ -1,9 +1,11 @@
 import express from 'express'
-import * as api from "./api"
 
-export const register = (app: express.Application) => {
-    app.get("/", async (req, res) => {
-        
-    });
-    api.register(app);
+import task from './task'
+import user from './user';
+
+const routes = (app: express.Application) => {
+  app.use('/', user)
+  app.use('/tasks', task)
 }
+
+export default routes;
