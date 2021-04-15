@@ -1,17 +1,21 @@
 <template>
   <div>
-    <div :key="timeEntry.text" v-for="timeEntry in timeEntries">
-      <TimeEntry :timeEntry="timeEntry" />
+    <div :key="index" v-for="(result, index) in results">
+      <TimeEntry :timeEntry="timeEntries[result.id]" :task="tasks[timeEntries[result.id].story_id]" :rate="rates[0]"/>
     </div>
   </div>
 </template>
 
 <script>
 import TimeEntry from "./TimeEntry";
+
 export default {
   name: "TimeEntries",
   props: {
-    timeEntries: Array
+    timeEntries: Object,
+    results: Array,
+    tasks: Object,
+    rates: Array
   },
   components: {
     TimeEntry,
