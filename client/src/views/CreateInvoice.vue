@@ -10,7 +10,15 @@
       :results="results"
       :rates="rates"
     />
-    <p>Total: {{ total }} USD</p>
+    <div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+      <h5>Total: {{ total }} USD</h5>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <button class="btn btn-primary">Create Invoice</button>
+    </div>
+    <br>
+    </div>
   </div>
 </template>
 
@@ -18,6 +26,7 @@
 import CreateInvoiceHeader from "@/components/CreateInvoiceHeader.vue";
 import axios from "axios";
 import TimeEntries from "@/components/TimeEntries.vue";
+import numeral from "numeral";
 
 export default {
   name: "CreateInvoice",
@@ -41,7 +50,7 @@ export default {
           (this.timeEntries[result.id].time_in_minutes / 60) * this.rates[0]
       );
       if (totalPerTimeEntry.length > 0) {
-        return totalPerTimeEntry.reduce((prev, current) => prev + current);
+        return numeral(totalPerTimeEntry.reduce((prev, current) => prev + current)).format("0,0");
       }
       return 0;
     },
@@ -58,7 +67,7 @@ export default {
         },
       })
         .then((response) => {
-        console.log(response.data);
+          console.log(response.data);
           this.results = response.data.results;
           this.timeEntries = response.data.time_entries;
           this.tasks = response.data.stories;
