@@ -4,7 +4,13 @@
       @import-time-entries="importTimeEntries"
       :projects="projects"
     />
-    <TimeEntries :timeEntries="timeEntries" :tasks="tasks" :results = "results" :rates = "rates" />
+    <TimeEntries
+      :timeEntries="timeEntries"
+      :tasks="tasks"
+      :results="results"
+      :rates="rates"
+    />
+    <p>Total: {{ total }} USD</p>
   </div>
 </template>
 
@@ -25,14 +31,26 @@ export default {
       projects: [],
       tasks: [],
       results: [],
-      rates: [10]
+      rates: [10],
     };
+  },
+  computed: {
+    total: function () {
+      var totalPerTimeEntry = this.results.map(
+        (result) =>
+          (this.timeEntries[result.id].time_in_minutes / 60) * this.rates[0]
+      );
+      if (totalPerTimeEntry.length > 0) {
+        return totalPerTimeEntry.reduce((prev, current) => prev + current);
+      }
+      return 0;
+    },
   },
   methods: {
     importTimeEntries(workspace_id, created_after, created_before) {
       axios({
         method: "get",
-        url: "http://localhost:5000/time",
+        url: "http://localhost:5000/tasks/time",
         params: {
           workspace_id: workspace_id,
           created_after: created_after,
@@ -40,7 +58,8 @@ export default {
         },
       })
         .then((response) => {
-            this.results = response.data.results;
+        console.log(response.data);
+          this.results = response.data.results;
           this.timeEntries = response.data.time_entries;
           this.tasks = response.data.stories;
         })
