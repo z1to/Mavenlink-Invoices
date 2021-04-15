@@ -12,9 +12,9 @@ router.get("", async (req, res) => {
     };
     axios.get(process.env.MAVENLINK_TASK_URL, options)
     .then(response => {
-        res.status(200).send(response.data.stories);
+        console.log(response.data.stories);
     })
-    .catch(error => res.status(400).send(error));
+    .catch(error => console.log(error));
 });
 
 // Create a task in Mavenlink
@@ -29,8 +29,8 @@ router.post("/create", async (req, res) => {
     story_type: "task"
     };
     axios.post(process.env.MAVENLINK_TASK_URL, data, options)
-    .then(response => res.status(200).send(response))
-    .catch(error => res.status(400).send(error));
+    .then(response => console.log(response))
+    .catch(error => console.log(error));
 });
 
 // Update task in Mavenlink
@@ -41,8 +41,8 @@ router.put("/update", async (req, res) => {
         }
     };
     axios.put(process.env.MAVENLINK_TASK_URL+"/741780125", {percentage_complete: 50}, options)
-    .then(response => res.status(200).send(response))
-    .catch(error => res.status(400).send(error));
+    .then(response => console.log(response))
+    .catch(error => console.log(error)); 
 });
 
 // Delete a task in Mavenlink
@@ -53,8 +53,24 @@ router.delete("/delete", async (req, res) => {
         }
     };
     axios.delete(process.env.MAVENLINK_TASK_URL+"/741778695", options)
-    .then(response => res.status(200).send(response))
-    .catch(error => res.status(400).send(error));
+    .then(response => console.log(response))
+    .catch(error => console.log(error)); 
+});
+
+//Get time entries from Mavenlink
+router.get("/time", async (req, res) => {
+    console.log(req.query);
+    const options = {
+        headers:{
+            Authorization: "Bearer " + process.env.MAVENLINK_TOKEN
+        }
+    };
+    const url = process.env.MAVENLINK_TIME_URL+'?include=story';
+    axios.get(url, options)
+    .then(response => {
+        res.send(response.data);
+    })
+    .catch(error => console.log(error));
 });
 
 export default router;

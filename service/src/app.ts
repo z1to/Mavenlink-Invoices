@@ -1,31 +1,47 @@
 import express from 'express'
+import mongoose from 'mongoose'
+import helmet from 'helmet'
 import dotenv from 'dotenv'
-import bodyparser from 'body-parser'
-import * as routes from './routes'
 
+import routes from './routes'
+
+// Initialize dotenv
 dotenv.config()
+
+// Initialize express app
 const app = express()
-app.use(bodyparser.urlencoded({extended:true}));
-app.use(bodyparser.json());
-// Add headers
-app.use(function (req, res, next) {
+const port = process.env.PORT
 
-  // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', '*');
+// Parse application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }))
 
-  // Request methods you wish to allow
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+// Parse application/json
+app.use(express.json())
 
-  // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+// Enhance API's security
+app.use(helmet())
 
-  // Pass to next layer of middleware
-  next();
-});
+// Mongoose setup
+mongoose.connect('mongodb://localhost/' + process.env.DB + '?authSource=admin',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    user: process.env.DBUSER,
+    pass: process.env.DBPASSWORD
+  })
+mongoose.set('useCreateIndex', true)
 
-routes.register(app);
-const port = 5000
+// Open connection to database
+const db = mongoose.connection
+db.on('error', console.error.bind(console, 'connection error:'))
+db.once('open', () => {
+  console.log('Connected successfully to db')
+})
 
+// Add routes
+routes(app)
+
+// Start service
 app.listen(port, () => {
   console.log(`Running at http://localhost:${port}`)
 })
