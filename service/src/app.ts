@@ -4,6 +4,7 @@ import helmet from 'helmet'
 import dotenv from 'dotenv'
 
 import routes from './routes'
+import AutoIncrementFactory from 'mongoose-sequence';
 
 // Initialize dotenv
 dotenv.config()

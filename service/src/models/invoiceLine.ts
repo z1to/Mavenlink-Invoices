@@ -2,7 +2,7 @@ import express from 'express'
 import { model, Schema, Model, Document } from 'mongoose';
 
 export interface IInvoiceLine extends Document {
-    invoiceId: Number
+    invoiceId: String,
     datePerformed: Date,
     timeInMinutes: Number,
     notes: String,
@@ -16,7 +16,7 @@ export interface IInvoiceLine extends Document {
 
 const invoiceLineSchema: Schema = new Schema({
     invoiceId: {
-        type: Number,
+        type: String,
         required: true
     },
     datePerformed: {

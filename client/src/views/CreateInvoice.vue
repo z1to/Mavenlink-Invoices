@@ -100,12 +100,14 @@ export default {
     createInvoice: function () {
       var taskIds = [];
       this.results.map((task) => taskIds.push(task.id));
-      var invoiceData = [];
+      var invoiceData = {
+        invoiceDate: this.invoiceDate,
+        projectId: this.selectedProject,
+        invoiceLineData: [],
+      };
       for (var timeEntry in this.timeEntries) {
         if (taskIds.includes(timeEntry)) {
-          invoiceData.push({
-            invoiceDate: this.invoiceDate,
-            projectId: this.selectedProject,
+          invoiceData.invoiceLineData.push({
             datePerformed: this.timeEntries[timeEntry].date_performed,
             timeInMinutes: this.timeEntries[timeEntry].time_in_minutes,
             notes: this.timeEntries[timeEntry].notes,

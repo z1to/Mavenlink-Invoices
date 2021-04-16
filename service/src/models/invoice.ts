@@ -1,9 +1,12 @@
 import express from 'express'
 import { model, Schema, Model, Document } from 'mongoose';
+const mongoose = require('mongoose')
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 export interface IInvoice extends Document {
     invoiceDate: Date,
-    projectId: Number
+    projectId: Number,
+    number: Number
 }
 
 const invoiceSchema: Schema = new Schema({
@@ -14,7 +17,13 @@ const invoiceSchema: Schema = new Schema({
     projectId: {
         type: Number,
         required: true
-    }
+    },
+    number: Number
 });
 
+// AutoIncrement now is the instance
+//const AutoIncrement = AutoIncrementFactory(invoiceSchema);
+
+//const AutoIncrement = Inc(invoiceSchema);
+invoiceSchema.plugin(AutoIncrement, { inc_field: 'number' });
 export const Invoice: Model<IInvoice> = model('Invoice', invoiceSchema);
