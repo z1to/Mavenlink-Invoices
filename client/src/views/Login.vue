@@ -7,6 +7,7 @@
     <input v-model="password" placeholder="pass" />
     <button @click="login">Submit</button>
   </div>
+  <h5 v-if="error">Error: {{ error }}</h5>
 </template>
 
 <script>
