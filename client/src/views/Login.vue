@@ -12,30 +12,45 @@
 <script>
 import axios from "axios";
 import qs from "qs";
-
 import { Options, Vue } from "vue-class-component";
+
+import router from "@/router/index.ts";
 
 async function login() {
   const data = {
-    "username": this.username,
-    "password": this.password,
+    mavenlinkUsername: this.username,
+    password: this.password,
   };
 
   const options = {
     method: "POST",
-    headers: { "content-type": "application/x-www-form-urlencoded", "Access-Control-Allow-Origin": "*" },
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
+    },
     data: qs.stringify(data),
     url: "http://localhost:5000/login",
   };
 
-  let status, token, error;
-  axios(options)
+  await axios(options)
     .then((res) => {
-      status = res.status;
-      token = res.data.message;
+      this.status = res.status;
+      this.token = res.data.message;
+
+      if (this.status == 200) {
+        switch (this.token) {
+          case 'User not found' || 'Invalid password':
+              this.error = this.token;
+              break;
+          default:
+            console.log('That');
+            this.$store.commit('setAuthorization', true);
+            this.$store.commit('setServiceToken', this.token);
+            return router.push('/');
+        }
+      }
     })
     .catch((err) => {
-        error = err;
+      this.error = err;
     });
 }
 
@@ -44,6 +59,15 @@ async function login() {
     return {
       username: "",
       password: "",
+      status: "",
+      token: "",
+      error: "",
+    };
+  },
+  created() {
+    // If already authorized redirect to home
+    if (this.$store.state.authorized == true) {
+        return router.push('/');
     }
   },
   methods: {

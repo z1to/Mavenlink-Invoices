@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
-import Home from "../views/Home.vue";
-import Login from "../views/Login.vue";
+import store from "@/store/index";
+import Home from "@/views/Home.vue";
+import Login from "@/views/Login.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -23,11 +24,20 @@ const routes: Array<RouteRecordRaw> = [
     name: "Login",
     component: Login,
   },
+  {
+    path: "/:pathMatch(.*)*",
+    redirect: "/",
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'Login' && !store.state.authorized) next({ name: 'Login' })
+  else next()
+})
 
 export default router;
