@@ -39,14 +39,13 @@ async function login() {
 
       if (this.status == 200) {
         switch (this.token) {
-          case 'User not found' || 'Invalid password':
-              this.error = this.token;
-              break;
+          case "User not found" || "Invalid password":
+            this.error = this.token;
+            break;
           default:
-            console.log('That');
-            this.$store.commit('setAuthorization', true);
-            this.$store.commit('setServiceToken', this.token);
-            return router.push('/');
+            this.$store.commit("setAuthorization", true);
+            this.$store.commit("setServiceToken", this.token);
+            return router.push("/");
         }
       }
     })
@@ -68,7 +67,7 @@ async function login() {
   created() {
     // If already authorized redirect to home
     if (this.$store.state.authorized == true) {
-        return router.push('/');
+      return router.push("/");
     }
   },
   methods: {

@@ -1,10 +1,10 @@
 import { createStore } from "vuex";
-import VuexPersist from 'vuex-persist';
+import VuexPersist from "vuex-persist";
 
 const vuexLocalStorage = new VuexPersist({
-  key: 'vuex',
+  key: "vuex",
   storage: window.localStorage,
-})
+});
 
 export default createStore({
   state: {
@@ -17,7 +17,7 @@ export default createStore({
     },
     setServiceToken(state, newState) {
       state.serviceToken = newState;
-    }
+    },
   },
   actions: {},
   modules: {},
