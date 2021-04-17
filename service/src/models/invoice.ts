@@ -21,9 +21,5 @@ const invoiceSchema: Schema = new Schema({
     number: Number
 });
 
-// AutoIncrement now is the instance
-//const AutoIncrement = AutoIncrementFactory(invoiceSchema);
-
-//const AutoIncrement = Inc(invoiceSchema);
 invoiceSchema.plugin(AutoIncrement, { inc_field: 'number' });
 export const Invoice: Model<IInvoice> = model('Invoice', invoiceSchema);
