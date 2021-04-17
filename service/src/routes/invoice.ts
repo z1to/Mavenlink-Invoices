@@ -21,8 +21,8 @@ router.get("/invoiceLines", async (req, res) => {
 
 // Get an invoice by id
 router.get("/:invoiceId", async (req, res) => {
-    InvoiceController.getInvoiceById(req.params.invoiceId).
-        then(result => res.status(200).send(result))
+    InvoiceController.getInvoiceById(req.params.invoiceId)
+        .then(result => res.status(200).send(result))
         .catch(err => res.status(400).send(err));
 });
 
@@ -33,12 +33,19 @@ router.get("/invoiceLines/:invoiceLineId", async (req, res) => {
         .catch(err => res.status(400).send(err));
 });
 
+// Delete an invoice
+router.delete("/delete/:invoiceId", async (req, res) => {
+    InvoiceController.deleteInvoice(req.params.invoiceId)
+        .then(result => res.status(200).send(result))
+        .catch(err => res.status(400).send(err));
+});
 
-
-
-
-
-
+// Delete an invoice line
+router.delete("/invoiceLines/delete/:invoiceLineId", async (req, res) => {
+    InvoiceController.deleteInvoiceLine(req.params.invoiceLineId)
+        .then(result => res.status(200).send(result))
+        .catch(err => res.status(400).send(err));
+});
 
 // Create an invoice
 router.post("/create", async (req, res) => {
@@ -46,15 +53,19 @@ router.post("/create", async (req, res) => {
         .then(result => res.status(200).send(result))
         .catch(err => res.status(400).send(err));
 });
-
 // Update an invoice
 router.put("/update", async (req, res) => {
-    InvoiceController.updateInvoice(req.body.filter, req.body.newValues);
+    InvoiceController.updateInvoice(req.body.id, req.body.newValues)
+        .then(result => res.status(200).send(result))
+        .catch(err => res.status(400).send(err));
 });
 
-// Delete an invoice
-router.delete("/delete", async (req, res) => {
-    InvoiceController.deleteInvoice(req.body);
+// Update invoice line
+router.put("/invoiceLines/update", async (req, res) => {
+    InvoiceController.updateInvoiceLine(req.body.id, req.body.newValues)
+        .then(result => res.status(200).send(result))
+        .catch(err => res.status(400).send(err));
 });
+
 
 export default router;

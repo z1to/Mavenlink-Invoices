@@ -36,6 +36,31 @@ export async function getInvoiceLineById(id) {
         .catch(err => { throw err });
 }
 
+//Get a single invoice
+//param {Objec} cond: key (from schema) value pair array used to find the document
+export async function getInvoice(cond) {
+    return await Invoice.findOne(cond)
+        .then(result => { return result; })
+        .catch(err => { throw err });
+}
+
+//Delete invoice
+export async function deleteInvoice(id) {
+    return await Invoice.deleteOne({ _id: id })
+        .then(result => {
+            InvoiceLine.deleteMany({ "invoiceId": id }).catch(err => { throw err; });
+            return result;
+        })
+        .catch(err => { throw err });
+}
+
+//Delete invoice line
+export async function deleteInvoiceLine(id) {
+    return await InvoiceLine.deleteOne({ _id: id })
+        .then(result => { return result; })
+        .catch(err => { throw err });
+}
+
 //Create invoice
 //Doesn't create partial invoices
 export async function createInvoice(invoiceData) {
@@ -44,62 +69,32 @@ export async function createInvoice(invoiceData) {
         projectId: invoiceData.projectId
     });
     var invoiceId = -1;
-    var createdInvoiceLines = [];
     return await invoice.save().then((result) => {
         invoiceId = result.id;
         invoiceData.invoiceLineData.map(line => {
             line.invoiceId = result._id;
         });
-        invoiceData.invoiceLineData.map(line => createInvoiceLine(line)
-            .then(invoiceLine => createdInvoiceLines.push(invoiceLine._id))
-            .catch(err => {
-                //delete the created invoice and invoice lines 
-                deleteInvoice({ _id: invoiceId });
-                createdInvoiceLines.map(id => deleteInvoiceLine({ _id: id }));
-                throw err;
-            }));
+        InvoiceLine.insertMany(invoiceData.invoiceLineData)
+            .then(invoiceLines => { return invoiceLines; })
+            .catch(err => { deleteInvoice(invoiceId); throw err; });
         return result;
     }).catch(err => { throw err; });
 }
 
-//Create invoice line
-export async function createInvoiceLine(invoiceLineData) {
-    const invoiceLine = new InvoiceLine(invoiceLineData);
-    return await invoiceLine.save()
-        .then((result) => { return result; })
-        .catch(err => { throw err; });
-}
-
 //Update invoice
-//param {Object} filter: used to find the document to update
+//param {Number} id: used to find the document to update
 //param {Object} newValues: the new document values
-export async function updateInvoice(filter, newValues) {
-    await Invoice.updateOne(filter, newValues)
+export async function updateInvoice(id, newValues) {
+    return await Invoice.updateOne({ _id: id }, newValues)
         .then(result => { return result; })
         .catch(err => { throw err });
 }
 
 //Update invoice line
-//param {Object} filter: used to find the document to update
+//param {Object} id: used to find the document to update
 //param {Object} newValues: the new document values
-export async function updateInvoiceLine(filter, newValues) {
-    await InvoiceLine.updateOne(filter, newValues)
-        .then(result => { return result; })
-        .catch(err => { throw err });
-}
-
-//Delete invoice
-//param {Objec} cond: key (from schema) value pair array used to find the document to delete
-export async function deleteInvoice(cond) {
-    await Invoice.deleteOne(cond)
-        .then(result => { return result; })
-        .catch(err => { throw err });
-}
-
-//Delete invoice line
-//param {Objec} cond: key (from schema) value pair array used to find the document to delete
-export async function deleteInvoiceLine(cond) {
-    await InvoiceLine.deleteOne(cond)
+export async function updateInvoiceLine(id, newValues) {
+    return await InvoiceLine.updateOne({ _id: id }, newValues)
         .then(result => { return result; })
         .catch(err => { throw err });
 }
