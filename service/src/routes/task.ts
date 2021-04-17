@@ -4,19 +4,30 @@ import axios from 'axios'
 const router = express.Router();
 
 // Get a list of tasks from Mavenlink
-router.get("", async (req, res) => {
+router.get("/mavenlink", async (req, res) => {
     const options = {
         headers:{
             Authorization: "Bearer " + process.env.MAVENLINK_TOKEN
         }
     };
-    axios.get(process.env.MAVENLINK_TASK_URL, options)
+    let params = req.query;
+    let queryString = buildQueryString(params);
+    //let queryString = "?per_page=200&workspace_id=35576775&with_assignees=16925965&starting_between=2019-12-15:2019-12-16&without_past_completed=true"
+    axios.get(process.env.MAVENLINK_TASK_URL+queryString, options)
     .then(response => {
-        console.log(response.data.stories);
+        res.status(200).send({results: response.data.results, stories: response.data.stories});
     })
-    .catch(error => console.log(error));
+    .catch(error => res.status(400).send(error));
 });
 
+//Builds query string
+function buildQueryString(params){
+    var queryString = '?';
+    for(var param in params){
+        queryString = queryString + param + '=' + params[param] + '&';
+    }
+    return queryString.slice(0,-1); //to remove the last character
+}
 // Create a task in Mavenlink
 router.post("/create", async (req, res) => {
     const options = {
