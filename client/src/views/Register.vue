@@ -92,6 +92,12 @@ async function register() {
       error: "",
     };
   },
+  created() {
+    // If already authorized redirect to home
+    if (this.$store.state.authorized == true) {
+      return router.push("/");
+    }
+  },
   methods: {
     register,
   },

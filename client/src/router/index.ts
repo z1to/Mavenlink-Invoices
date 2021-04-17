@@ -43,8 +43,18 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.name !== "Login" && !store.state.authorized) next({ name: "Login" });
-  else next();
+  // If unauthorized
+  if (!store.state.authorized) {
+    if (to.name == "Login" || to.name == "Register") {
+      next();
+    }
+    else {
+      next({ name: "Login" });
+    }
+  }
+  else {
+    next();
+  }
 });
 
 export default router;
