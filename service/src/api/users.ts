@@ -11,10 +11,9 @@ export async function register(req: express.Request): Promise<string> {
     const phone: string = req.body.phone;
     const email: string = req.body.email;
     const password: string = req.body.password;
-    const mavenlinkUsername: string = req.body.mavenlinkUsername;
 
     // Find user
-    const findUser: IUser = await User.findOne({ mavenlinkUsername: mavenlinkUsername }).exec();
+    const findUser: IUser = await User.findOne({ email: email }).exec();
 
     // Check Mavenlink username has not been registered before
     if (findUser !== null) {
@@ -31,8 +30,7 @@ export async function register(req: express.Request): Promise<string> {
       phone: phone,
       email: email,
       password: saltHash.passwordHash,
-      salt: saltHash.salt,
-      mavenlinkUsername: mavenlinkUsername
+      salt: saltHash.salt
     });
 
     return 'Success'
@@ -44,11 +42,11 @@ export async function register(req: express.Request): Promise<string> {
 
 export async function login(req: express.Request): Promise<string> {
   try {
-    const mavenlinkUsername: string = req.body.mavenlinkUsername;
+    const email: string = req.body.email;
     const password: string = req.body.password;
 
     // Find user
-    const findUser: IUser = await User.findOne({ mavenlinkUsername: mavenlinkUsername }).exec();
+    const findUser: IUser = await User.findOne({ email: email }).exec();
 
     if (findUser == null) {
       return 'User not found';
@@ -60,7 +58,7 @@ export async function login(req: express.Request): Promise<string> {
     if (isPasswordValid(password.toString(), hashedPassword, salt)) {
       // Generate bearer token
       const token = jwt.sign(
-                      { mavenlinkUsername: findUser.mavenlinkUsername },
+                      { email: findUser.email },
                       process.env.JWTSECRET,
                       { expiresIn: '1h' },
                     );

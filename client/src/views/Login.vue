@@ -3,8 +3,8 @@
     <h1>Login</h1>
   </div>
   <div id="login-form">
-    <input v-model="username" placeholder="user" />
-    <input v-model="password" placeholder="pass" />
+    <input v-model="email" placeholder="email" />
+    <input v-model="password" type="password" placeholder="pass" />
     <button @click="login">Submit</button>
   </div>
   <h5 v-if="error">Error: {{ error }}</h5>
@@ -19,7 +19,7 @@ import router from "@/router/index.ts";
 
 async function login() {
   const data = {
-    mavenlinkUsername: this.username,
+    email: this.email,
     password: this.password,
   };
 
@@ -39,7 +39,10 @@ async function login() {
 
       if (this.status == 200) {
         switch (this.token) {
-          case "User not found" || "Invalid password":
+          case "User not found":
+            this.error = this.token;
+            break;
+          case "Invalid password":
             this.error = this.token;
             break;
           default:
@@ -57,7 +60,7 @@ async function login() {
 @Options({
   data() {
     return {
-      username: "",
+      email: "",
       password: "",
       status: "",
       token: "",

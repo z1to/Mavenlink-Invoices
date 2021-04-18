@@ -3,8 +3,8 @@
     <h1>Register</h1>
   </div>
   <div id="register-form">
-    <label for="mavenlinkUsername">Mavenlink Username </label>
-    <input v-model="mavenlinkUsername" id="mavenlinkUsername" /><br />
+    <label for="email">Email </label>
+    <input v-model="email" id="email" /><br />
 
     <label for="password">Password </label>
     <input v-model="password" id="password" /><br />
@@ -16,10 +16,7 @@
     <input v-model="address" id="address" /><br />
 
     <label for="phone">Phone number </label>
-    <input v-model="phone" id="phone" /><br />
-
-    <label for="email">Email </label>
-    <input v-model="email" id="email" /><br /><br />
+    <input v-model="phone" id="phone" /><br /><br />
 
     <button @click="register">Submit</button>
   </div>
@@ -35,12 +32,11 @@ import router from "@/router/index.ts";
 
 async function register() {
   const data = {
-    mavenlinkUsername: this.mavenlinkUsername,
+    email: this.email,
     password: this.password,
     name: this.name,
     address: this.address,
     phone: this.phone,
-    email: this.email,
   };
 
   let prop;
@@ -83,12 +79,11 @@ async function register() {
 @Options({
   data() {
     return {
-      mavenlinkUsername: "",
+      email: "",
       password: "",
       name: "",
       address: "",
       phone: "",
-      email: "",
       error: "",
     };
   },

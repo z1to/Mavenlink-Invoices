@@ -53,12 +53,10 @@ router.beforeEach((to, from, next) => {
   if (!store.state.authorized) {
     if (to.name == "Login" || to.name == "Register") {
       next();
-    }
-    else {
+    } else {
       next({ name: "Login" });
     }
-  }
-  else {
+  } else {
     next();
   }
 });
