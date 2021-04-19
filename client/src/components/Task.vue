@@ -17,7 +17,7 @@
         <p>Task description: {{ task.description }}</p>
       </div>
       <div class="col-1 border-bottom">
-        
+
       </div>
       <div class="col-1 border-bottom">{{ rate }} USD</div>
     </div>

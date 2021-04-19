@@ -40,7 +40,6 @@ import Task from "./Task";
 export default {
   name: "Task",
   props: {
-    
     results: Array,
     rates: Array,
   },

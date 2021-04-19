@@ -12,7 +12,6 @@
     />
     <div class="container-fluid">
       <div class="row d-flex justify-content-center">
-        
       </div>
       <br />
     </div>
@@ -41,13 +40,13 @@ export default {
   },
   methods: {
     getTasks(workspace_id) {
-      this.selectedProject = workspace_id;
-      axios({
+      this.selectedProject = workspace_id.project;
+      var results = axios({
         method: "get",
-        headers: {'Authorization': 'Bearer $(this.$store.state.serviceToken'},
+        headers: {'Authorization': `Bearer ${this.$store.state.serviceToken}`},
         url: "http://localhost:5000/tasks/mavenlink",
         params: {
-          workspace_id: workspace_id,
+          workspace_id: this.selectedProject,
         },
       })
         .then((response) => {
@@ -56,6 +55,8 @@ export default {
           this.tasks = response.data.stories;
         })
         .catch((error) => console.log(error));
+
+      console.log(results);
     },
 
     deleteTask: function (taskId) {
@@ -67,7 +68,7 @@ export default {
     },
 
     // updateTask: function (taskId) {
-      
+
     // },
 
     // createTask: function(taskid) {
@@ -109,7 +110,7 @@ export default {
     //     .catch((error) => console.log(error));
     // },
   },
-  
+
   created() {
     this.projects = ["35576775", "35576725"];
   },
