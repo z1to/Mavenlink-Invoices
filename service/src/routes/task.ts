@@ -1,10 +1,14 @@
 import express from 'express'
 import axios from 'axios'
+import { validateBearerToken } from '../models/user';
 
 const router = express.Router();
 
 // Get a list of tasks from Mavenlink
 router.get("/mavenlink", async (req, res) => {
+    if (!validateBearerToken(req.headers.authorization, res))
+        return;
+
     const options = {
         headers: {
             Authorization: "Bearer " + process.env.MAVENLINK_TOKEN
@@ -30,6 +34,9 @@ function buildQueryString(params) {
 
 // Create a task in Mavenlink
 router.post("/mavenlink/create", async (req, res) => {
+    if (!validateBearerToken(req.headers.authorization, res))
+        return;
+
     const options = {
         headers: {
             Authorization: "Bearer " + process.env.MAVENLINK_TOKEN
@@ -39,11 +46,13 @@ router.post("/mavenlink/create", async (req, res) => {
     await axios.post(process.env.MAVENLINK_TASK_URL, req.body, options)
         .then(response => res.status(200).send(response.status))
         .catch(error => res.status(400).send(error));
-
 });
 
 // Update task in Mavenlink
 router.put("/mavenlink/update", async (req, res) => {
+    if (!validateBearerToken(req.headers.authorization, res))
+        return;
+
     const options = {
         headers: {
             Authorization: "Bearer " + process.env.MAVENLINK_TOKEN
@@ -53,11 +62,13 @@ router.put("/mavenlink/update", async (req, res) => {
     await axios.put(process.env.MAVENLINK_TASK_URL + "/" + req.query.id, req.body, options)
         .then(response => res.status(200).send(response.status))
         .catch(error => res.status(400).send(error));
-
 });
 
 // Delete a task in Mavenlink
 router.delete("/mavenlink/delete", async (req, res) => {
+    if (!validateBearerToken(req.headers.authorization, res))
+        return;
+
     const options = {
         headers: {
             Authorization: "Bearer " + process.env.MAVENLINK_TOKEN
@@ -66,11 +77,13 @@ router.delete("/mavenlink/delete", async (req, res) => {
     await axios.delete(process.env.MAVENLINK_TASK_URL + "/" + req.query.id, options)
         .then(response => res.status(200).send(response.status))
         .catch(error => res.status(400).send(error));
-
 });
 
 //Get time entries from Mavenlink
 router.get("/time", async (req, res) => {
+    if (!validateBearerToken(req.headers.authorization, res))
+        return;
+
     const options = {
         headers: {
             Authorization: "Bearer " + process.env.MAVENLINK_TOKEN
