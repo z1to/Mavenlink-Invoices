@@ -25,8 +25,7 @@
     <br />
     <div :key="index" v-for="(result, index) in results">
       <Task
-        @delete-time="$emit('delete-time', result.id)"
-        :timeEntry="timeEntries[result.id]"
+        @get-tasks="$emit('get-tasks', result.id)"
         :task="tasks[timeEntries[result.id].story_id]"
         :rate="rates[0]"
         :timeEntryId="result.id"
@@ -48,6 +47,6 @@ export default {
   components: {
     Task,
   },
-  emits: ["delete-time"],
+  emits: ["get-tasks"],
 };
 </script>

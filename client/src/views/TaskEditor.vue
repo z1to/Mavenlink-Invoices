@@ -44,6 +44,7 @@ export default {
       this.selectedProject = workspace_id;
       axios({
         method: "get",
+        headers: {'Authorization': 'Bearer $(this.$store.state.serviceToken'},
         url: "http://localhost:5000/tasks/mavenlink",
         params: {
           workspace_id: workspace_id,
