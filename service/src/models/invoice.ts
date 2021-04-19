@@ -1,4 +1,3 @@
-import express from 'express'
 import { model, Schema, Model, Document } from 'mongoose';
 const mongoose = require('mongoose')
 const AutoIncrement = require('mongoose-sequence')(mongoose);

@@ -1,4 +1,3 @@
-import express from 'express'
 import { model, Schema, Model, Document } from 'mongoose';
 
 export interface IInvoiceLine extends Document {

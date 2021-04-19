@@ -1,6 +1,5 @@
 import { Invoice } from "../models/invoice"
 import { InvoiceLine } from "../models/invoiceLine"
-import { validateBearerToken } from "../models/user";
 
 //Get invoices
 //param {Objec} filter: key (from schema) value pair array used to filter the results
@@ -98,7 +97,3 @@ export async function updateInvoiceLine(id, newValues) {
         .then(result => { return result; })
         .catch(err => { throw err });
 }
-
-
-
-

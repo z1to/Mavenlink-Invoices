@@ -5,7 +5,6 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 
 import routes from './routes'
-import AutoIncrementFactory from 'mongoose-sequence';
 
 // Initialize dotenv
 dotenv.config()
@@ -15,19 +14,18 @@ const app = express()
 const port = process.env.PORT
 
 app.use(function (req, res, next) {
-
   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', '*')
 
   // Request methods you wish to allow
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
 
   // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
 
   // Pass to next layer of middleware
-  next();
-});
+  next()
+})
 
 // Parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }))

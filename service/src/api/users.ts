@@ -15,9 +15,9 @@ export async function register(req: express.Request): Promise<string> {
     // Find user
     const findUser: IUser = await User.findOne({ email: email }).exec();
 
-    // Check Mavenlink username has not been registered before
+    // Check email has not been registered before
     if (findUser !== null) {
-      return 'User could not be created. Mavenlink username is already in use.'
+      return 'User could not be created. Email is already in use.'
     }
 
     // Salt and hash password
