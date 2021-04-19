@@ -1,4 +1,8 @@
 <template>
+  <div id="registration-alert">
+    <h3 v-if="this.$store.state.successfulRegistration">Congrats! The account
+    has been created succesfuly. Now proceed to log in.</h3>
+  </div>
   <div class="login">
     <h1>Login</h1>
   </div>
@@ -18,6 +22,11 @@ import { Options, Vue } from "vue-class-component";
 import router from "@/router/index.ts";
 
 async function login() {
+  // Stop displaying successful registration alert
+  if (this.$store.state.successfulRegistration) {
+    this.$store.commit("setSuccessfulRegistration", false);
+  }
+
   const data = {
     email: this.email,
     password: this.password,

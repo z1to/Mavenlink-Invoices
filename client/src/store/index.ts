@@ -10,6 +10,7 @@ export default createStore({
   state: {
     authorized: false,
     serviceToken: "",
+    successfulRegistration: false,
   },
   mutations: {
     setAuthorization(state, newState) {
@@ -17,6 +18,9 @@ export default createStore({
     },
     setServiceToken(state, newState) {
       state.serviceToken = newState;
+    },
+    setSuccessfulRegistration(state, newState) {
+      state.successfulRegistration = newState;
     },
   },
   actions: {},

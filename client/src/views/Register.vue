@@ -7,7 +7,7 @@
     <input v-model="email" id="email" /><br />
 
     <label for="password">Password </label>
-    <input v-model="password" id="password" /><br />
+    <input v-model="password" type="password" id="password" /><br />
 
     <label for="name">Name </label>
     <input v-model="name" id="name" /><br />
@@ -67,6 +67,8 @@ async function register() {
             this.error = this.token;
             break;
           default:
+            // Display successful registration alert in /login
+            this.$store.commit("setSuccessfulRegistration", true);
             return router.push("/login");
         }
       }
