@@ -1,7 +1,8 @@
 <template>
   <div id="registration-alert">
-    <h3 v-if="this.$store.state.successfulRegistration">Congrats! The account
-    has been created succesfuly. Now proceed to log in.</h3>
+    <h3 v-if="this.$store.state.successfulRegistration">
+      Congrats! The account has been created succesfuly. Now proceed to log in.
+    </h3>
   </div>
   <div class="login">
     <h1>Login</h1>
