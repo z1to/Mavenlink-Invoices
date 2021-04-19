@@ -1,0 +1,505 @@
+{
+	"info": {
+		"_postman_id": "d69441e5-b092-47b7-8748-6ea660529411",
+		"name": "TaskTracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Invoices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Invoice Lines",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/invoices/invoiceLines",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"invoices",
+						"invoiceLines"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invoice by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/invoices/607901b2c88f4cdbd319d746",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"invoices",
+						"607901b2c88f4cdbd319d746"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invoice Line by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/invoices/invoiceLines/6079022a4f4bc1dc2e09ab5c",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"invoices",
+						"invoiceLines",
+						"6079022a4f4bc1dc2e09ab5c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invoices with params",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/invoices?number=17",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"invoices"
+					],
+					"query": [
+						{
+							"key": "number",
+							"value": "17"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invoice Lines with params",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/invoices/invoiceLines?invoiceId",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"invoices",
+						"invoiceLines"
+					],
+					"query": [
+						{
+							"key": "invoiceId",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invoice",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/invoiceLines/delete/6078f1f406a01dd528c97216",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"invoiceLines",
+						"delete",
+						"6078f1f406a01dd528c97216"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invoice Line",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/invoices/invoiceLines/delete/6079022a4f4bc1dc2e09ab5c",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"invoices",
+						"invoiceLines",
+						"delete",
+						"6079022a4f4bc1dc2e09ab5c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invoice",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Invoice",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/invoices/update",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"invoices",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invoice Line",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/invoices/invoiceLines/update",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"invoices",
+						"invoiceLines",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mavenlink Tasks",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/tasks/mavenlink?with_assignees=16926975&include=current_assignments&starting_between=2019-12-15:2021-12-16&by_status=started,not started&per_page=200",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"tasks",
+						"mavenlink"
+					],
+					"query": [
+						{
+							"key": "workspace_id",
+							"value": "35576775",
+							"disabled": true
+						},
+						{
+							"key": "with_assignees",
+							"value": "16926975"
+						},
+						{
+							"key": "include",
+							"value": "current_assignments"
+						},
+						{
+							"key": "starting_between",
+							"value": "2019-12-15:2021-12-16"
+						},
+						{
+							"key": "due_between",
+							"value": "2019-12-15:2019-12-16",
+							"disabled": true
+						},
+						{
+							"key": "without_past_completed",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "by_status",
+							"value": "started,not started"
+						},
+						{
+							"key": "per_page",
+							"value": "200"
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mavenlink Task",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"workspace_id\":\"35576705\",\n\"title\":\"Test\",\n\"story_type\":\"task\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/tasks/mavenlink/create",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"tasks",
+						"mavenlink",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mavenlink Task",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"percentage_complete\":\"50\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/tasks/mavenlink/update?id=748289015",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"tasks",
+						"mavenlink",
+						"update"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "748289015"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mavenlink Task",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/tasks/mavenlink/delete?id=748289015",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"tasks",
+						"mavenlink",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "748289015"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Time Entries",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "0fb05785d32d00eb4278c5012f5d3682361862ad680a3e925da42b50a444f681",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/tasks/time?include=story&with_user_ids=16926975",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"tasks",
+						"time"
+					],
+					"query": [
+						{
+							"key": "include",
+							"value": "story"
+						},
+						{
+							"key": "with_user_ids",
+							"value": "16926975"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mavenlink Assignment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "0fb05785d32d00eb4278c5012f5d3682361862ad680a3e925da42b50a444f681",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"story_id\": \"687005635\",\n\"assignee_id\": \"16926375\",\n\"current\": true,\n\"estimated_minutes\": 120\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.mavenlink.com/api/v1/assignments",
+					"protocol": "https",
+					"host": [
+						"api",
+						"mavenlink",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"assignments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mavenlink Project",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Mavenlink Assignment",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Mavenlink Workweek",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Mavenlink Workweek Membership",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base-url",
+			"value": "http://localhost:5000"
+		}
+	]
+}
