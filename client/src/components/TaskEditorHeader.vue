@@ -16,10 +16,13 @@
             </option>
           </select>
         </div>
+        <button @click="getTasks" class="btn btn-primary">
+          Get Tasks
+        </button>
         <div class="col-sm-2">
           <!-- -->
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
           <button @click="createTask" class="btn btn-primary">
           Create New Mavenlink Task
         </button>
