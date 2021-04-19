@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import numeral from "numeral";
 
 export default {
   name: "Task",

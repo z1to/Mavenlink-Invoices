@@ -23,7 +23,6 @@
 import TaskEditorHeader from "@/components/TaskEditorHeader.vue";
 import axios from "axios";
 import TaskList from "@/components/TaskList.vue";
-import numeral from "numeral";
 
 export default {
   name: "TaskEditor",
