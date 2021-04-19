@@ -1,10 +1,13 @@
 import express from 'express'
 import axios from 'axios'
+import { validateBearerToken } from '../models/user';
 
 const router = express.Router();
 
 // Get a list of tasks from Mavenlink
 router.get("", async (req, res) => {
+    validateBearerToken(req.headers.authorization, res);
+
     const options = {
         headers:{
             Authorization: "Bearer " + process.env.MAVENLINK_TOKEN
@@ -19,6 +22,8 @@ router.get("", async (req, res) => {
 
 // Create a task in Mavenlink
 router.post("/create", async (req, res) => {
+    validateBearerToken(req.headers.authorization, res);
+
     const options = {
         headers:{
             Authorization: "Bearer " + process.env.MAVENLINK_TOKEN
@@ -35,6 +40,8 @@ router.post("/create", async (req, res) => {
 
 // Update task in Mavenlink
 router.put("/update", async (req, res) => {
+    validateBearerToken(req.headers.authorization, res);
+
     const options = {
         headers:{
             Authorization: "Bearer " + process.env.MAVENLINK_TOKEN
@@ -47,6 +54,8 @@ router.put("/update", async (req, res) => {
 
 // Delete a task in Mavenlink
 router.delete("/delete", async (req, res) => {
+    validateBearerToken(req.headers.authorization, res);
+
     const options = {
         headers:{
             Authorization: "Bearer " + process.env.MAVENLINK_TOKEN

@@ -15,7 +15,6 @@ export interface IUser extends Document {
   email: String,
   password: String,
   salt: String,
-  mavenlinkUsername: String
 }
 
 const userSchema: Schema = new Schema({
@@ -33,6 +32,8 @@ const userSchema: Schema = new Schema({
   },
   email: {
     type: String,
+    unique: true,
+    index: true,
     required: true
   },
   password: {
@@ -41,12 +42,6 @@ const userSchema: Schema = new Schema({
   },
   salt: {
     type: String,
-    required: true
-  },
-  mavenlinkUsername: {
-    type: String,
-    unique: true,
-    index: true,
     required: true
   }
 });
