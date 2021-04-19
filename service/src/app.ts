@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import helmet from 'helmet'
 import dotenv from 'dotenv'
+import cors from 'cors'
 
 import routes from './routes'
 import AutoIncrementFactory from 'mongoose-sequence';
@@ -36,6 +37,9 @@ app.use(express.json())
 
 // Enhance API's security
 app.use(helmet())
+
+// Enable CORS
+app.use(cors())
 
 // Mongoose setup
 mongoose.connect('mongodb://localhost/' + process.env.DB + '?authSource=admin',
