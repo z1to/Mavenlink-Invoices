@@ -44,7 +44,7 @@ export default {
       this.selectedProject = workspace_id;
       axios({
         method: "get",
-        url: "http://localhost:5000/tasks",
+        url: "http://localhost:5000/tasks/mavenlink",
         params: {
           workspace_id: workspace_id,
         },
