@@ -46,6 +46,6 @@ export default {
       );
     },
   },
-  emits: ["delete-time"]
+  emits: ["delete-time"],
 };
 </script>

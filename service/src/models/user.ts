@@ -117,4 +117,6 @@ export function validateBearerToken(authorization: string, res: express.Response
     res.status(403).send(error)
     return false;
   }
+
+  return true;
 }

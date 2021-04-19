@@ -73,9 +73,11 @@ export default {
   methods: {
     importTimeEntries(workspace_id, created_after, created_before) {
       this.selectedProject = workspace_id;
+
       axios({
         method: "get",
         url: "http://localhost:5000/tasks/time",
+        headers: { 'Authorization': `Bearer ${this.$store.state.serviceToken}` },
         params: {
           workspace_id: workspace_id,
           created_after: created_after,
@@ -124,6 +126,7 @@ export default {
       axios({
         method: "post",
         url: "http://localhost:5000/invoices/create",
+        headers: { 'Authorization': `Bearer ${this.$store.state.serviceToken}` },
         data: {
           invoiceData: invoiceData,
         },

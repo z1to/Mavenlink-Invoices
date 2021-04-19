@@ -5,8 +5,8 @@
   </div>
   <div v-else id="nav">
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-    <router-link to="/create-invoice">Create Invoice</router-link>
+    <router-link to="/about">About</router-link> |
+    <router-link to="/create-invoice">Create Invoice</router-link> |
     <router-link to="/logout">Logout</router-link>
   </div>
   <router-view />
