@@ -164,3 +164,59 @@ List of commands:
 - `dev`: Start the application with nodemon
 - `lint`: Run eslint
 - `lint-fix`: Run eslint and let it fix the errors
+
+# Web Service API
+
+Optional parameters are marked as `(optional)`.
+
+## Users
+
+### Register
+
+**Request**
+Body, `x-www-form-urlencoded` parameters:
+- name
+- address
+- phone
+- email
+- password
+
+**Successful Response**
+```
+{ "message": "Success" }
+```
+
+### Log In
+
+**Request**
+Body, `x-www-form-urlencoded` parameters:
+- email
+- password
+
+**Successful Response**
+```
+{ "message": "Bearer <token>" }
+```
+
+# External Packages
+
+## Client
+- Axios
+- Eslint
+- Prettier
+- Sass
+- TypeScript
+- VueJS
+
+## Service
+- Axios
+- Cors
+- Dotenv
+- Express
+- Helmet
+- JSON Web Token
+- Mongoose
+- Prettier
+- TypeScript
+- Eslint
+- Nodemon
