@@ -23,11 +23,9 @@
       </div>
     </div>
     <br />
-    <div :key="index" v-for="(result, index) in results">
+    <div :key="index" v-for="(task,index) in tasks">
       <Task
-        @get-tasks="$emit('get-tasks', result.id)"
-        :results:="results[results_id]"
-        
+        :task="tasks"
       />
     </div>
   </div>
@@ -39,6 +37,7 @@ import Task from "./Task";
 export default {
   name: "Task",
   props: {
+    tasks: Object,
     results: Array,
     rates: Array,
   },

@@ -51,7 +51,7 @@ export default {
       })
         .then((response) => {
           console.log(response.data);
-          this.results = response.data.results;
+          // this.results = response.data.results;
           this.tasks = response.data.stories;
         })
         .catch((error) => console.log(error));

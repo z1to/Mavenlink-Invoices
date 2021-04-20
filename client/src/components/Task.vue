@@ -10,16 +10,15 @@
         />
       </div>
       <div class="col-2 border-bottom">
-        <p class="text-left">{{ timeEntry.date_performed }}</p>
       </div>
       <div class="col-5 text-left border-bottom">
-        <p>Task title: {{ task.title }}</p>
-        <p>Task description: {{ task.description }}</p>
+        <p>Task title: {{ task}}</p>
+        <!-- <p>Task description: {{ task.description }}</p> -->
       </div>
       <div class="col-1 border-bottom">
 
       </div>
-      <div class="col-1 border-bottom">{{ rate }} USD</div>
+      <!-- <div class="col-1 border-bottom">{{ rate }} USD</div> -->
     </div>
     <br />
   </div>
@@ -30,8 +29,7 @@
 export default {
   name: "Task",
   props: {
-    task: Object,
-    rate: Number,
+    task: Object
   },
   emits: ["delete-time"]
 };
