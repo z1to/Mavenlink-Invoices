@@ -24,15 +24,32 @@
     </div>
     <br />
     <div :key="index" v-for="(task,index) in tasks">
-      <Task
-        :task="tasks"
-      />
+      <div class="container-fluid">
+    <div class="row">
+      <div class="col-1 border-bottom">
+        <font-awesome-icon
+          @click="$emit('delete-time')"
+          icon="minus-circle"
+          size="sm"
+          style="color: Tomato"
+        />
+      </div>
+      <div class="col-2 border-bottom">
+      </div>
+      <div class="col-5 text-left border-bottom">
+        <p>Task title: {{task.title}}</p>
+        <p>Task description: {{ task.description }}</p>
+      </div>
+      <div class="col-1 border-bottom">
+      </div>
+    </div>
+    <br />
+  </div>
     </div>
   </div>
 </template>
 
 <script>
-import Task from "./Task";
 
 export default {
   name: "Task",
@@ -42,7 +59,6 @@ export default {
     rates: Array,
   },
   components: {
-    Task,
   },
   emits: ["get-tasks"],
 };
