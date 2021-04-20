@@ -32,13 +32,13 @@
           </div>
         
           <div class="col-1 text-left border-bottom">
-            Hours
+            <input type="text" id="fname" name="fname" placeholder="Hours" size="5"><br>
           </div>
           <div class="col-1 text-left border-bottom">
-            Rate
+            <input type="text" id="fname" name="fname" placeholder="Rate" size="5"><br>
           </div>
           <div class="col-1 text-left border-bottom">
-            Total
+            $0.00
           </div>
           <div class="col-1 text-left border-bottom">
             <button @click="editTasks" class="btn btn-success">
