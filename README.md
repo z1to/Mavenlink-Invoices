@@ -174,8 +174,6 @@ Optional parameters are marked as `(optional)`.
 ### Register
 
 **Request**
-POST /register
-
 Body, `x-www-form-urlencoded` parameters:
 - name
 - address
@@ -191,8 +189,6 @@ Body, `x-www-form-urlencoded` parameters:
 ### Log In
 
 **Request**
-POST /login
-
 Body, `x-www-form-urlencoded` parameters:
 - email
 - password
@@ -201,7 +197,6 @@ Body, `x-www-form-urlencoded` parameters:
 ```
 { "message": "Bearer <token>" }
 ```
-
 ## Invoices
 
 ### Get invoices 
@@ -213,6 +208,7 @@ Query params:
 - _id
 - invoiceDate
 - projectId
+- number
 - __v
 
 **Successful Response**
@@ -233,6 +229,382 @@ Query params:
     }...
 ]
 ```
+
+### Get invoice by id
+
+**Request**
+GET /invoices/{{id}}
+
+**Successful Response**
+```
+[
+    {
+        "_id": "6078f715c462e5d7b064d3a1",
+        "invoiceDate": "2021-04-15",
+        "projectId": 35576725,
+        "__v": 0
+    },
+    {
+        "_id": "6078fcdecafdeed994e5ff98",
+        "invoiceDate": "2021-04-15",
+        "projectId": 35576725,
+        "number": 1,
+        "__v": 0
+    }...
+]
+```
+
+### Get invoice lines
+
+**Request**
+GET /invoices/invoiceLines
+
+Query params:
+- _id:
+- datePerformed
+- timeInMinutes
+- notes
+- approved
+- storyId
+- taskTitle
+- taskDescription
+- rate
+- timeEntryId
+- invoiceId
+
+**Successful Response**
+```
+[
+    {
+        "_id": "6079022a4f4bc1dc2e09ab5d",
+        "datePerformed": "2021-01-16T00:00:00.000Z",
+        "timeInMinutes": 420,
+        "notes": null,
+        "approved": false,
+        "storyId": 687005635,
+        "taskTitle": "Consulting",
+        "taskDescription": null,
+        "rate": 10,
+        "timeEntryId": 1838262685,
+        "invoiceId": "6079022a4f4bc1dc2e09ab5a",
+        "__v": 0
+    } ...
+]
+```
+### Get invoice line by id
+
+**Request**
+GET /invoices/invoiceLines/{{id}}
+
+**Successful Response**
+```
+[
+    {
+        "_id": "6079022a4f4bc1dc2e09ab5d",
+        "datePerformed": "2021-01-16T00:00:00.000Z",
+        "timeInMinutes": 420,
+        "notes": null,
+        "approved": false,
+        "storyId": 687005635,
+        "taskTitle": "Consulting",
+        "taskDescription": null,
+        "rate": 10,
+        "timeEntryId": 1838262685,
+        "invoiceId": "6079022a4f4bc1dc2e09ab5a",
+        "__v": 0
+    } ...
+]
+```
+### Delete invoice
+
+**Request**
+DELETE /invoiceLines/delete/{{id}}
+
+**Successful Response**
+```
+{
+    "n": 1,
+    "ok": 1,
+    "deletedCount": 1
+}
+```
+### Delete invoice line
+
+**Request**
+DELETE /invoices/invoiceLines/delete/6079022a4f4bc1dc2e09ab5c
+
+**Successful Response**
+```
+{
+    "n": 1,
+    "ok": 1,
+    "deletedCount": 1
+}
+```
+### Create invoice
+
+**Request**
+POST /invoices/create
+
+Body `JSON` parameters:
+- invoiceDate: The date of the invoice
+- projectId: Mavenlink Project Id
+- datePerformed: Automatically imported from Mavenlink
+- timeInMinutes: Automatically imported from Mavenlink
+- notes: Automatically imported from Mavenlink
+- approved: Automatically imported from Mavenlink
+- storyId: : Automatically imported from Mavenlink
+- taskTitle: : Automatically imported from Mavenlink
+- taskDescription: : Automatically imported from Mavenlink
+- rate: : Automatically imported from Mavenlink
+- timeEntryId: Automatically imported from Mavenlink
+
+**Sample Request**
+```
+{"invoiceData": {
+   "invoiceDate": "2021-04-09",
+   "projectId": "35576725",
+   "invoiceLineData": [
+      {
+         "datePerformed": "2021-01-15",
+         "timeInMinutes": 420,
+         "notes": null,
+         "approved": false,
+         "storyId": "687005635",
+         "taskTitle": "Consulting",
+         "taskDescription": null,
+         "rate": 10,
+         "timeEntryId": "1838262675"
+      } ...
+   ]
+ }
+}
+```
+
+**Successful Response**
+Status: 200 OK
+```
+{
+    "_id": "607b3a56ef0c73fefb2af71b",
+    "invoiceDate": "2021-04-09",
+    "projectId": 35576725,
+    "number": 22,
+    "__v": 0
+}
+```
+**Bad Request**
+Status: 400 Bad Request
+
+### Edit invoice
+
+**Request**
+PUT /invoices/update
+
+Body `JSON` parameters:
+- id: The invoice id 
+- invoiceDate
+- projectId
+- number
+
+**Sample Request**
+```
+{"id": "607b3a56ef0c73fefb2af71b",
+"newValues": {
+    "invoiceDate": "2021-05-15"
+}
+}
+```
+
+**Successful Response**
+Status: 200 OK
+```
+{
+    "n": 1,
+    "nModified": 1,
+    "ok": 1
+}
+```
+**Bad Request**
+Status: 400 Bad Request
+
+### Edit invoice line
+
+**Request**
+PUT /invoices/invoiceLines/update
+
+Body `JSON` parameters:
+- id: invoice line id
+- datePerformed
+- timeInMinutes
+- notes
+- approved
+- storyId
+- taskTitle
+- taskDescription
+- rate
+- timeEntryId
+
+**Sample Request**
+```
+{"id": "6079022a4f4bc1dc2e09ab5d",
+"newValues": {
+    "rate": "50"
+}
+}
+```
+
+**Successful Response**
+Status: 200 OK
+```
+{
+    "n": 1,
+    "nModified": 1,
+    "ok": 1
+}
+```
+**Bad Request**
+Status: 400 Bad Request
+
+### Get Mavenlink Tasks
+
+**Request**
+GET /tasks/mavenlink
+
+Query parameters: 
+Any of the query parameters specified in the Mavenlink documentation for Stories
+
+
+**Successful Response**
+Status: 200 OK
+
+```
+{
+    "results": [
+        {
+            "key": "stories",
+            "id": "687005635"
+        } ...
+    ],
+    "stories": {
+     "687005635": {
+            "title": "Consulting",
+            "description": null,
+            "updated_at": "2021-04-17T14:38:56-07:00",
+            "assignment_timestamped_at": "2021-04-17T14:38:56-07:00",
+            "created_at": "2021-01-14T10:42:32-08:00",
+            "due_date": "2021-04-13",
+            "start_date": "2019-12-15",
+            "story_type": "task",
+            "state": "started",
+            "position": 100000000,
+            "archived": false,
+            "deleted_at": null,
+            "sub_story_count": 0,
+            "percentage_complete": 100,
+            "priority": "normal",
+            "has_proofing_access": false,
+            "ancestor_ids": [],
+            "subtree_depth": 0,
+            "ancestry_depth": 0,
+            "time_trackable": true,
+            "time_estimate_in_minutes": 150000,
+            "logged_billable_time_in_minutes": 133860,
+            "logged_nonbillable_time_in_minutes": 0,
+            "sub_stories_time_estimate_in_minutes": null,
+            "sub_stories_billable_time_in_minutes": null,
+            "weight": null,
+            "budget_estimate_in_cents": 37500000,
+            "budget_used_in_cents": 26469750,
+            "uninvoiced_balance_in_cents": 26469750,
+            "invoiced_balance_in_cents": 0,
+            "sub_stories_budget_estimate_in_cents": null,
+            "sub_stories_budget_used_in_cents": null,
+            "fixed_fee": false,
+            "billable": true,
+            "workspace_id": "35576775",
+            "creator_id": "16925965",
+            "parent_id": null,
+            "root_id": null,
+            "current_assignment_ids": [
+                "476005615",
+                "476015325",
+                "476015545",
+                "476015555",
+                "476015575",
+                "476015595",
+                "476015605",
+                "476015615",
+                "507741365"
+            ],
+            "id": "687005635"
+        }
+      }...
+```
+
+**Bad Request**
+Status: 400 Bad Request
+
+### Create Mavenlink Task
+
+**Request**
+POST /tasks/mavenlink/create
+
+Body `JSON` parameters: 
+Any of the parameters specified in the Mavenlink documentation for Stories
+
+
+**Successful Response**
+Status: 200 OK
+
+**Bad Request**
+Status: 400 Bad Request
+
+### Edit Mavenlink Task
+
+**Request**
+PUT /tasks/mavenlink/update
+
+Query parameters:
+- id: the Mavenlink task id
+
+Body `JSON` parameters: 
+Any of the parameters specified in the Mavenlink documentation for Stories
+
+**Successful Response**
+Status: 200 OK
+
+**Bad Request**
+Status: 400 Bad Request
+
+### Delete Mavenlink Task
+
+**Request**
+DELETE /tasks/mavenlink/delete
+
+Query parameters:
+- id: the Mavenlink task id
+
+**Successful Response**
+Status: 204 No Content
+
+**Bad Request**
+Status: 400 Bad Request
+
+
+### Get Mavenlink Time Entries
+
+**Request**
+GET /tasks/time
+
+Query parameters:
+Any of the query parameters specified in the Mavenlink documentation for Time Entries
+
+**Successful Response**
+Status: 200 OK
+
+**Bad Request**
+Status: 400 Bad Request
+
 
 # External Packages
 
