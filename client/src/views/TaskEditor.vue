@@ -75,40 +75,6 @@ export default {
 
     // },
 
-    // createInvoice: function () {
-    //   var taskIds = [];
-    //   this.results.map((task) => taskIds.push(task.id));
-    //   var invoiceData = {
-    //     invoiceDate: this.invoiceDate,
-    //     projectId: this.selectedProject,
-    //     invoiceLineData: [],
-    //   };
-    //   for (var timeEntry in this.timeEntries) {
-    //     if (taskIds.includes(timeEntry)) {
-    //       invoiceData.invoiceLineData.push({
-    //         notes: this.timeEntries[timeEntry].notes,
-    //         approved: this.timeEntries[timeEntry].approved,
-    //         storyId: this.timeEntries[timeEntry].story_id,
-    //         taskTitle: this.tasks[this.timeEntries[timeEntry].story_id].title,
-    //         taskDescription: this.tasks[this.timeEntries[timeEntry].story_id]
-    //           .description,
-    //         rate: this.rates[0],
-    //         timeEntryId: timeEntry,
-    //       });
-    //     }
-    //   }
-    //   axios({
-    //     method: "post",
-    //     url: "http://localhost:5000/invoices/create",
-    //     data: {
-    //       invoiceData: invoiceData,
-    //     },
-    //   })
-    //     .then((response) => {
-    //       console.log(response.data);
-    //     })
-    //     .catch((error) => console.log(error));
-    // },
   },
 
   created() {
