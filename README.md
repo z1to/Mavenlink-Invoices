@@ -197,6 +197,37 @@ Body, `x-www-form-urlencoded` parameters:
 ```
 { "message": "Bearer <token>" }
 ```
+## Invoices
+
+### Get invoices 
+
+**Request**
+GET /invoices
+
+Query params:
+- _id
+- invoiceDate
+- projectId
+- __v
+
+**Successful Response**
+```
+[
+    {
+        "_id": "6078f715c462e5d7b064d3a1",
+        "invoiceDate": "2021-04-15",
+        "projectId": 35576725,
+        "__v": 0
+    },
+    {
+        "_id": "6078fcdecafdeed994e5ff98",
+        "invoiceDate": "2021-04-15",
+        "projectId": 35576725,
+        "number": 1,
+        "__v": 0
+    }...
+]
+```
 
 # External Packages
 
