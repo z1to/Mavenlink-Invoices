@@ -2,7 +2,6 @@
   <div class="create-invoice">
     <TaskEditorHeader
       @get-tasks="getTasks"
-      :projects="projects"
     />
     <TaskList
       :tasks="tasks"
@@ -31,7 +30,6 @@ export default {
   },
   data() {
     return {
-      projects: [],
       tasks: [],
       results: [],
       rates: [10],
@@ -39,15 +37,11 @@ export default {
     };
   },
   methods: {
-    getTasks(workspace_id) {
-      this.selectedProject = workspace_id.project;
+    getTasks() {
       var results = axios({
         method: "get",
         headers: {'Authorization': `Bearer ${this.$store.state.serviceToken}`},
         url: "http://localhost:5000/tasks/mavenlink",
-        params: {
-          workspace_id: this.selectedProject,
-        },
       })
         .then((response) => {
           console.log(response.data);
@@ -61,7 +55,7 @@ export default {
     deleteTask(workspace_id) {
       this.selectedProject = workspace_id.project;
       var results = axios({
-        method: "post",
+        method: "delete",
         headers: {'Authorization': `Bearer ${this.$store.state.serviceToken}`},
         url: "http://localhost:5000/tasks/mavenlink/delete",
         params: {
@@ -116,8 +110,8 @@ export default {
     },
   },
 
-  created() {
-    this.projects = ["35576775", "35576725"];
-  },
+  mounted() {
+    this.getTasks()
+  }
 };
 </script>

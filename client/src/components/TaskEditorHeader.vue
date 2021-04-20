@@ -14,9 +14,6 @@
         </button>
         </div>
          <div class="col-sm-4">
-          <button @click="getTasks" class="btn btn-primary">
-          Get Tasks
-        </button>
         </div>
       </div>
     </div>
@@ -26,9 +23,6 @@
 <script>
 export default {
   name: "TaskEditorHeader",
-  props: {
-    projects: Array,
-  },
   data() {
     return { selected: "" };
   },

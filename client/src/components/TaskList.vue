@@ -14,8 +14,7 @@
         Total
       </div>
       <div
-        class="col-2 font-weight-bold p-3 mb-2 bg-secondary text-white text-center"
-      >
+        class="col-2 font-weight-bold p-3 mb-2 bg-secondary text-white text-center">
         Actions
       </div>
     </div>
@@ -24,13 +23,11 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-1 border-bottom">
-          
           </div>
           <div class="col-6 text-left border-bottom">
             <p>Task title: {{task.title}}</p>
             <p>Task description: {{ task.description }}</p>
           </div>
-        
           <div class="col-1 text-left border-bottom">
             <input type="text" id="fname" name="fname" placeholder="Hours" size="5"><br>
           </div>
