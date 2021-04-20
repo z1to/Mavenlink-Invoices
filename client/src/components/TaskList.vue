@@ -26,9 +26,8 @@
     <div :key="index" v-for="(result, index) in results">
       <Task
         @get-tasks="$emit('get-tasks', result.id)"
-        :task="tasks[timeEntries[result.id].story_id]"
-        :rate="rates[0]"
-        :timeEntryId="result.id"
+        :results:="results[results_id]"
+        
       />
     </div>
   </div>

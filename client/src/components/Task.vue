@@ -32,7 +32,6 @@ export default {
   props: {
     task: Object,
     rate: Number,
-    timeEntryId: String,
   },
   emits: ["delete-time"]
 };

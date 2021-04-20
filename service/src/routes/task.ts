@@ -6,8 +6,8 @@ const router = express.Router()
 
 // Get a list of tasks from Mavenlink
 router.get("/mavenlink", async (req, res) => {
-    if (!validateBearerToken(req.headers.authorization, res))
-        return;
+    // if (!validateBearerToken(req.headers.authorization, res))
+    //     return;
 
     const options = {
         headers: {
