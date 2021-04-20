@@ -51,7 +51,6 @@ export default {
       })
         .then((response) => {
           console.log(response.data);
-          // this.results = response.data.results;
           this.tasks = response.data.stories;
         })
         .catch((error) => console.log(error));
@@ -59,22 +58,62 @@ export default {
       console.log(results);
     },
 
-    deleteTask: function (taskId) {
-      if (confirm('Are you sure you want to delete task: ${taskId} ?')) {
-        this.results = this.results.filter(
-          (result) => result.id !== taskId
-        );
-      }
+    deleteTask(workspace_id) {
+      this.selectedProject = workspace_id.project;
+      var results = axios({
+        method: "post",
+        headers: {'Authorization': `Bearer ${this.$store.state.serviceToken}`},
+        url: "http://localhost:5000/tasks/mavenlink/delete",
+        params: {
+          workspace_id: this.selectedProject,
+        },
+      })
+        .then((response) => {
+          console.log(response.data);
+          this.tasks = response.data.stories;
+        })
+        .catch((error) => console.log(error));
+
+      console.log(results);
     },
 
-    // updateTask: function (taskId) {
+    updateTask(workspace_id) {
+      this.selectedProject = workspace_id.project;
+      var results = axios({
+        method: "post",
+        headers: {'Authorization': `Bearer ${this.$store.state.serviceToken}`},
+        url: "http://localhost:5000/tasks/mavenlink/update",
+        params: {
+          workspace_id: this.selectedProject,
+        },
+      })
+        .then((response) => {
+          console.log(response.data);
+          this.tasks = response.data.stories;
+        })
+        .catch((error) => console.log(error));
 
-    // },
+      console.log(results);
+    },
 
-    // createTask: function(taskid) {
+    createTask(workspace_id) {
+      this.selectedProject = workspace_id.project;
+      var results = axios({
+        method: "post",
+        headers: {'Authorization': `Bearer ${this.$store.state.serviceToken}`},
+        url: "http://localhost:5000/tasks/mavenlink/create",
+        params: {
+          workspace_id: this.selectedProject,
+        },
+      })
+        .then((response) => {
+          console.log(response.data);
+          this.tasks = response.data.stories;
+        })
+        .catch((error) => console.log(error));
 
-    // },
-
+      console.log(results);
+    },
   },
 
   created() {

@@ -46,7 +46,7 @@
             </button>
           </div>
           <div class="col-1 text-left border-bottom">
-            <button @click="deleteTasks" class="btn btn-danger">
+            <button @click="deleteTask" class="btn btn-danger">
               Delete
             </button>
           </div>

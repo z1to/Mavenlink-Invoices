@@ -7,9 +7,7 @@
     <div>
       <div class="form-group row">
         <div class="col-sm-4">
-          
         </div>
-        
         <div class="col-sm-4">
            <button @click="createTask" class="btn btn-primary">
           Create New Mavenlink Task
