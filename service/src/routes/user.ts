@@ -1,8 +1,8 @@
-import express from 'express';
+import express from 'express'
 
-import { login, register } from '../api/users';
+import { login, register } from '../api/users'
 
-const router = express.Router();
+const router = express.Router()
 
 router.post('/register', (req: express.Request, res: express.Response) => {
   register(req)
@@ -24,4 +24,4 @@ router.post('/login', (req: express.Request, res: express.Response) => {
     })
 })
 
-export default router;
+export default router
