@@ -6,15 +6,8 @@
     <br />
     <div>
       <div class="form-group row">
-        <label for="workspace_id" class="col-sm-2 col-form-label"
-          >Project</label
-        >
         <div class="col-sm-3">
-          <select id="workspace_id" v-model="workspace_id" class="form-control">
-            <option :key="index" v-for="(project, index) in projects">
-              {{ project }}
-            </option>
-          </select>
+          
         </div>
         <button @click="getTasks" class="btn btn-primary">
           Get Tasks
