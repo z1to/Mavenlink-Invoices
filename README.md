@@ -331,7 +331,7 @@ DELETE /invoiceLines/delete/{{id}}
 ### Delete invoice line
 
 **Request**
-DELETE /invoices/invoiceLines/delete/6079022a4f4bc1dc2e09ab5c
+DELETE /invoices/invoiceLines/delete/{{id]}
 
 **Successful Response**
 ```
