@@ -174,6 +174,8 @@ Optional parameters are marked as `(optional)`.
 ### Register
 
 **Request**
+POST /register
+
 Body, `x-www-form-urlencoded` parameters:
 - name
 - address
@@ -189,6 +191,8 @@ Body, `x-www-form-urlencoded` parameters:
 ### Log In
 
 **Request**
+POST /login
+
 Body, `x-www-form-urlencoded` parameters:
 - email
 - password
@@ -197,6 +201,7 @@ Body, `x-www-form-urlencoded` parameters:
 ```
 { "message": "Bearer <token>" }
 ```
+
 ## Invoices
 
 ### Get invoices 
