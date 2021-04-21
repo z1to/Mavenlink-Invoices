@@ -1,7 +1,7 @@
-import jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken'
 import express from 'express'
-import { model, Schema, Model, Document } from 'mongoose';
-import { createHmac, randomBytes } from 'crypto';
+import { model, Schema, Model, Document } from 'mongoose'
+import { createHmac, randomBytes } from 'crypto'
 
 /* Resources used:
  * https://ciphertrick.com/salt-hash-passwords-using-nodejs-crypto/
@@ -9,12 +9,12 @@ import { createHmac, randomBytes } from 'crypto';
  */
 
 export interface IUser extends Document {
-  name: String,
-  address: String,
-  phone: String,
-  email: String,
-  password: String,
-  salt: String,
+  name: string,
+  address: string,
+  phone: string,
+  email: string,
+  password: string,
+  salt: string,
 }
 
 const userSchema: Schema = new Schema({
@@ -44,19 +44,19 @@ const userSchema: Schema = new Schema({
     type: String,
     required: true
   }
-});
-export const User: Model<IUser> = model('User', userSchema);
+})
+export const User: Model<IUser> = model('User', userSchema)
 
 /**
  * Generates random string of characters i.e salt
  * @function
  * @param {number} length - Length of the random string.
  */
-function genRandomString(length: number) {
+function genRandomString (length: number) {
   return randomBytes(Math.ceil(length / 2))
-          .toString('hex')    // Convert to hexadecimal format
-          .slice(0, length);  // Return required number of characters
-};
+    .toString('hex') // Convert to hexadecimal format
+    .slice(0, length) // Return required number of characters
+}
 
 /**
 * hash password with sha512.
@@ -64,23 +64,23 @@ function genRandomString(length: number) {
 * @param {string} password - List of required fields.
 * @param {string} salt - Data to be validated.
 */
-function sha512(password: string, salt: string) {
+function sha512 (password: string, salt: string) {
   // Hashing algorithm sha512
-  const hash = createHmac('sha512', salt);
-  hash.update(password);
-  const value = hash.digest('hex');
+  const hash = createHmac('sha512', salt)
+  hash.update(password)
+  const value = hash.digest('hex')
 
   return {
-      salt: salt,
-      passwordHash: value
-  };
-};
+    salt: salt,
+    passwordHash: value
+  }
+}
 
-export function saltHashPassword(userpassword: string) {
+export function saltHashPassword (userpassword: string) {
   // Gives us salt of length 16
-  const salt = genRandomString(16);
+  const salt = genRandomString(16)
 
-  return sha512(userpassword, salt);
+  return sha512(userpassword, salt)
 }
 
 /**
@@ -90,11 +90,11 @@ export function saltHashPassword(userpassword: string) {
 * @param {string} hashedPassword - Hashed password saved in db
 * @param {string} salt - Salt saved in db
 */
-export function isPasswordValid(password: string, hashedPassword: string, salt: string) {
-  const sha = sha512(password, salt);
+export function isPasswordValid (password: string, hashedPassword: string, salt: string): boolean {
+  const sha = sha512(password, salt)
 
-  return hashedPassword === sha.passwordHash;
-};
+  return hashedPassword === sha.passwordHash
+}
 
 /**
 * Validate bearer token.
@@ -112,8 +112,8 @@ export function validateBearerToken(authorization: string, res: express.Response
   const token = authorization.replace('Bearer ', '')
 
   try {
-    jwt.verify(token, process.env.JWTSECRET);
-  } catch(error) {
+    jwt.verify(token, process.env.JWTSECRET)
+  } catch (error) {
     res.status(403).send(error)
     return false;
   }

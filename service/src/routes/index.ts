@@ -4,10 +4,10 @@ import task from './task'
 import user from './user';
 import invoice from './invoice';
 
-const routes = (app: express.Application) => {
+const routes = (app: express.Application): void => {
   app.use('/', user)
   app.use('/tasks', task)
   app.use('/invoices', invoice)
 }
 
-export default routes;
+export default routes

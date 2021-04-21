@@ -1,8 +1,8 @@
 import express from 'express'
 import axios from 'axios'
-import { validateBearerToken } from '../models/user';
+import { validateBearerToken } from '../models/user'
 
-const router = express.Router();
+const router = express.Router()
 
 // Get a list of tasks from Mavenlink
 router.get("/mavenlink", async (req, res) => {
@@ -99,4 +99,4 @@ router.get("/time", async (req, res) => {
         .catch(error => res.status(400).send(error));
 });
 
-export default router;
+export default router
