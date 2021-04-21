@@ -73,7 +73,7 @@ export default {
   methods: {
     importTimeEntries(workspace_id, created_after, created_before) {
       this.selectedProject = workspace_id;
-
+      console.log(this.$store.state.serviceToken);
       axios({
         method: "get",
         url: "http://localhost:5000/tasks/time",
