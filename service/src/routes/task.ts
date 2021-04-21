@@ -38,18 +38,18 @@ router.post('/mavenlink/create', async (req, res) => {
 
   await axios.post(process.env.MAVENLINK_TASK_URL, req.body, options)
     .then(async response => {
-      const mavenlinkId = response.data.results[0].id;
+      const mavenlinkId = response.data.results[0].id
 
       try {
         // Create new task object
         const task = <ITask>({
           mavenlinkId: mavenlinkId,
-          rate: req.body.rate,
-        });
+          rate: req.body.rate
+        })
 
         // Create task in db
-        await create(task);
-      } catch(error) {
+        await create(task)
+      } catch (error) {
         const options = {
           headers: {
             Authorization: 'Bearer ' + process.env.MAVENLINK_TOKEN
@@ -83,12 +83,12 @@ router.put('/mavenlink/update', async (req, res) => {
         // Create new task object
         const task = <ITask>({
           mavenlinkId: req.query.id,
-          rate: req.body.rate,
-        });
+          rate: req.body.rate
+        })
 
         // Update task in db
-        await update(task);
-      } catch(error) {
+        await update(task)
+      } catch (error) {
         return res.status(400).send({ error: error.message })
       }
 
