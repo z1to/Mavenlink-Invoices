@@ -35,10 +35,11 @@
               Task title: {{ task.title }}
             </div>
             <div v-else>
+              <label for="">Title: &nbsp; </label>
               <input
               v-model="editTaskName"
               type="text"
-              placeholder="New Task Name"
+              placeholder="New Task Title"
               size="20"
             />
             </div>
@@ -47,6 +48,7 @@
               Task description: {{ task.description }}
             </div>
             <div v-else>
+              <label for="">Description: &nbsp; </label>
               <input
               v-model="editTaskDesc"
               type="text"
@@ -61,7 +63,7 @@
             </div>
             <input
               v-else
-              v-model="newTaskHours"
+              v-model="editTaskHours"
               type="text"
               placeholder="Hours"
               size="5"
@@ -73,7 +75,7 @@
             </div>
             <input
               v-else
-              v-model="newTaskRate"
+              v-model="editTaskRate"
               type="text"
               placeholder="Rate"
               size="5"

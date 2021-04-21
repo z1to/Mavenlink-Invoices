@@ -60,18 +60,29 @@ export default {
     },
 
     //Parameters: workspace_id, newTask.name, newTask.description
-    updateTask(workspace_id) {
+    updateTask(
+      workspace_id,
+      editTaskName,
+      editTaskDesc,
+      editTaskHours,
+      editTaskRate
+    ) {
       this.selectedProject = workspace_id.project;
       var results = axios({
         method: "put",
         headers: { Authorization: `Bearer ${this.$store.state.serviceToken}` },
         url: "http://localhost:5000/tasks/mavenlink/update",
-        params: {
-          workspace_id: this.selectedProject,
+        data: {
+          workspace_id: workspace_id,
+          story_type: "task",
+          title: editTaskName,
+          description: editTaskDesc,
+          hours: editTaskHours,
+          rate: editTaskRate,
         },
       })
         .then((response) => {
-          this.tasks = response.data.stories;
+          this.getTasks();
         })
         .catch((error) => console.log(error));
     },
