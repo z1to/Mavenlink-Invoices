@@ -2,7 +2,7 @@ import { ITask, Task } from '../models/task'
 
 export async function create (task: ITask): Promise<string> {
   try {
-    if (task == undefined || task?.mavenlinkId == undefined || task?.rate == undefined) { throw new Error('Task could not be created. Empty properties were passed.') }
+    if (task === undefined || task?.mavenlinkId === undefined || task?.rate === undefined) { throw new Error('Task could not be created. Empty properties were passed.') }
 
     // Create user
     await Task.create({
@@ -18,7 +18,7 @@ export async function create (task: ITask): Promise<string> {
 
 export async function update (task: ITask): Promise<string> {
   try {
-    if (task == undefined || task?.mavenlinkId == undefined || task?.rate == undefined) { throw new Error('Task could not be updated. Empty properties were passed.') }
+    if (task === undefined || task?.mavenlinkId === undefined || task?.rate === undefined) { throw new Error('Task could not be updated. Empty properties were passed.') }
 
     // Find task
     const findTask: ITask = await Task.findOne({ mavenlinkId: task.mavenlinkId }).exec()
@@ -36,7 +36,7 @@ export async function update (task: ITask): Promise<string> {
 
     return 'Success'
   } catch (error) {
-    if (error.message != '') {
+    if (error.message !== '') {
       throw new Error(error)
     }
 

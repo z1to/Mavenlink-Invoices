@@ -78,7 +78,7 @@ router.put('/mavenlink/update', async (req, res) => {
   }
 
   await axios.put(process.env.MAVENLINK_TASK_URL + '/' + req.query.id, req.body, options)
-    .then(async response => {
+    .then(async () => {
       try {
         // Create new task object
         const task = <ITask>({
