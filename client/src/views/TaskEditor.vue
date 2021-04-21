@@ -92,7 +92,7 @@ export default {
     createTask(workspace_id, newTaskName, newTaskDescription, newTaskHours, newTaskRate) {
       var results = axios({
         method: "post",
-        // headers: {'Authorization': `Bearer ${this.$store.state.serviceToken}`},
+        headers: {'Authorization': `Bearer ${this.$store.state.serviceToken}`},
         url: "http://localhost:5000/tasks/mavenlink/create",
         data: {
           workspace_id: workspace_id,

@@ -17,9 +17,9 @@
         <div class="col-sm-4">
           <form action="">
             <label for="">Hours: &nbsp; </label>
-             <input v-model="newTaskHours" type="text" id="tdesc" name="tdesc" placeholder="New Hours" size="25"><br>
+             <input v-model="newTaskHours" type="text" id="thours" name="thours" placeholder="New Hours" size="25"><br>
              <label for="">Rate: &nbsp; &nbsp; </label>
-             <input v-model="newTaskRate" type="text" id="tdesc" name="tdesc" placeholder="New Rate" size="25"><br>
+             <input v-model="newTaskRate" type="text" id="trate" name="trate" placeholder="New Rate" size="25"><br>
            </form>
         </div>
          <div class="col-sm-4">
@@ -36,7 +36,7 @@
 export default {
   name: "TaskEditorHeader",
   data() {
-    return { 
+    return {
       selected: "" ,
       newTaskName: "",
       newTaskDescription: "",

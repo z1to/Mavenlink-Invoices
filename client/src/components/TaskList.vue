@@ -59,7 +59,7 @@
 export default {
   name: "Task",
   data() {
-    return { 
+    return {
       isEditing: false,
       payTotal: 0
     };
