@@ -1,15 +1,12 @@
 <template>
   <div class="create-invoice">
-    <b-alert show v-if="response !== ''">{{ response }}</b-alert>
-    <TaskEditorHeader
-      @createTask="createTask"
-    />
-    <TaskList
-      :tasks="tasks" @deleteTask="deleteTask"
-    />
+    <div class="alert alert-primary" show v-if="response !== ''">
+      {{ response }}
+    </div>
+    <TaskEditorHeader @createTask="createTask" />
+    <TaskList :tasks="tasks" @deleteTask="deleteTask" />
     <div class="container-fluid">
-      <div class="row d-flex justify-content-center">
-      </div>
+      <div class="row d-flex justify-content-center"></div>
       <br />
     </div>
   </div>
@@ -37,24 +34,20 @@ export default {
     getTasks() {
       var results = axios({
         method: "get",
-        headers: {'Authorization': `Bearer ${this.$store.state.serviceToken}`},
+        headers: { Authorization: `Bearer ${this.$store.state.serviceToken}` },
         url: "http://localhost:5000/tasks/mavenlink",
       })
         .then((response) => {
-          console.log(response.data);
           this.tasks = response.data.stories;
         })
         .catch((error) => console.log(error));
-
-      console.log(results);
     },
 
-     deleteTask(workspace_id) {
-      this.selectedProject = workspace_id.project;
+    deleteTask(task_id) {
       var results = axios({
         method: "delete",
-        headers: {'Authorization': `Bearer ${this.$store.state.serviceToken}`},
-        url: "http://localhost:5000/tasks/mavenlink/delete?id="+workspace_id,
+        headers: { Authorization: `Bearer ${this.$store.state.serviceToken}` },
+        url: "http://localhost:5000/tasks/mavenlink/delete?id=" + task_id,
       })
         .then(() => {
           this.response = "Task was successfully deleted";
@@ -62,10 +55,8 @@ export default {
         })
         .catch((error) => {
           this.response = "Task unable to be deleted";
-          console.log(error)
+          console.log(error);
         });
-
-      console.log(results);
     },
 
     //Parameters: workspace_id, newTask.name, newTask.description
@@ -73,26 +64,29 @@ export default {
       this.selectedProject = workspace_id.project;
       var results = axios({
         method: "put",
-        headers: {'Authorization': `Bearer ${this.$store.state.serviceToken}`},
+        headers: { Authorization: `Bearer ${this.$store.state.serviceToken}` },
         url: "http://localhost:5000/tasks/mavenlink/update",
         params: {
           workspace_id: this.selectedProject,
         },
       })
         .then((response) => {
-          console.log(response.data);
           this.tasks = response.data.stories;
         })
         .catch((error) => console.log(error));
-
-      console.log(results);
     },
 
     //Parameters: task.name, task.description
-    createTask(workspace_id, newTaskName, newTaskDescription, newTaskHours, newTaskRate) {
+    createTask(
+      workspace_id,
+      newTaskName,
+      newTaskDescription,
+      newTaskHours,
+      newTaskRate
+    ) {
       var results = axios({
         method: "post",
-        headers: {'Authorization': `Bearer ${this.$store.state.serviceToken}`},
+        headers: { Authorization: `Bearer ${this.$store.state.serviceToken}` },
         url: "http://localhost:5000/tasks/mavenlink/create",
         data: {
           workspace_id: workspace_id,
@@ -100,20 +94,17 @@ export default {
           title: newTaskName,
           description: newTaskDescription,
           hours: newTaskHours,
-          rate: newTaskRate
+          rate: newTaskRate,
         },
       })
         .then((response) => {
-          this.getTasks()
+          this.getTasks();
         })
         .catch((error) => console.log(error));
-
-      console.log(results);
     },
   },
-
   mounted() {
-    this.getTasks()
-  }
+    this.getTasks();
+  },
 };
 </script>
