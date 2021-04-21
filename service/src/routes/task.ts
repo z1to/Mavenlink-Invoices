@@ -1,5 +1,9 @@
 import express from 'express'
 import axios from 'axios'
+
+import { create, update } from '../api/tasks'
+
+import { ITask } from '../models/task'
 import { validateBearerToken } from '../models/user'
 
 const router = express.Router()
@@ -22,15 +26,6 @@ router.get('/mavenlink', async (req, res) => {
     .catch(error => res.status(400).send(error))
 })
 
-// Builds query string
-function buildQueryString (params) {
-  let queryString = '?'
-  for (const param in params) {
-    queryString = queryString + param + '=' + params[param] + '&'
-  }
-  return queryString.slice(0, -1) // to remove the last character
-}
-
 // Create a task in Mavenlink
 router.post('/mavenlink/create', async (req, res) => {
   if (!validateBearerToken(req.headers.authorization, res)) { return }
@@ -42,7 +37,33 @@ router.post('/mavenlink/create', async (req, res) => {
   }
 
   await axios.post(process.env.MAVENLINK_TASK_URL, req.body, options)
-    .then(response => res.status(200).send(response.status))
+    .then(async response => {
+      const mavenlinkId = response.data.results[0].id;
+
+      try {
+        // Create new task object
+        const myobj = <ITask>({
+          mavenlinkId: mavenlinkId,
+          rate: req.body.rate,
+        });
+
+        // Create task in db
+        await create(myobj);
+      } catch(error) {
+        const options = {
+          headers: {
+            Authorization: 'Bearer ' + process.env.MAVENLINK_TOKEN
+          }
+        }
+
+        // Delete task created in Mavenlink if task in db could not be created
+        await axios.delete(process.env.MAVENLINK_TASK_URL + '/' + mavenlinkId, options)
+        return res.status(400).send({ error: error.message })
+      }
+
+      // Send response
+      return res.sendStatus(200)
+    })
     .catch(error => res.status(400).send(error))
 })
 
@@ -93,5 +114,14 @@ router.get('/time', async (req, res) => {
     })
     .catch(error => res.status(400).send(error))
 })
+
+// Builds query string
+function buildQueryString (params) {
+  let queryString = '?'
+  for (const param in params) {
+    queryString = queryString + param + '=' + params[param] + '&'
+  }
+  return queryString.slice(0, -1) // to remove the last character
+}
 
 export default router
