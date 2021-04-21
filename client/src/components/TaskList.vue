@@ -38,12 +38,12 @@
             $0.00
           </div>
           <div class="col-1 text-left border-bottom">
-            <button @click="editTasks" class="btn btn-success">
+            <button @click="updateTask()" class="btn btn-success">
               Edit
             </button>
           </div>
           <div class="col-1 text-left border-bottom">
-            <button @click="deleteTask" class="btn btn-danger">
+            <button @click="deleteTask(task.id)" class="btn btn-danger">
               Delete
             </button>
           </div>
@@ -60,8 +60,6 @@ export default {
   name: "Task",
   props: {
     tasks: Object,
-    results: Array,
-    rates: Array,
   },
   components: {
   },

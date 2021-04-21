@@ -19,7 +19,7 @@
            </form>
         </div>
          <div class="col-sm-4">
-            <button @click="createTask" class="btn btn-primary">
+            <button @click="createTask()" class="btn btn-primary">
           Create New Mavenlink Task
         </button>
         </div>
