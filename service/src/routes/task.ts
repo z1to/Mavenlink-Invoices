@@ -42,13 +42,13 @@ router.post('/mavenlink/create', async (req, res) => {
 
       try {
         // Create new task object
-        const myobj = <ITask>({
+        const task = <ITask>({
           mavenlinkId: mavenlinkId,
           rate: req.body.rate,
         });
 
         // Create task in db
-        await create(myobj);
+        await create(task);
       } catch(error) {
         const options = {
           headers: {
@@ -78,7 +78,22 @@ router.put('/mavenlink/update', async (req, res) => {
   }
 
   await axios.put(process.env.MAVENLINK_TASK_URL + '/' + req.query.id, req.body, options)
-    .then(response => res.status(200).send(response.status))
+    .then(async response => {
+      try {
+        // Create new task object
+        const task = <ITask>({
+          mavenlinkId: req.query.id,
+          rate: req.body.rate,
+        });
+
+        // Update task in db
+        await update(task);
+      } catch(error) {
+        return res.status(400).send({ error: error.message })
+      }
+
+      return res.sendStatus(200)
+    })
     .catch(error => res.status(400).send(error))
 })
 
