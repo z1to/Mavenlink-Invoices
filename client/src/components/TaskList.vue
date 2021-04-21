@@ -52,7 +52,8 @@
           </div>
           <div class="col-1 text-left border-bottom">$0.00</div>
           <div class="col-1 text-left border-bottom">
-            <button @click="updateTask()" class="btn btn-success">Edit</button>
+            <button v-if="isEditing==false" @click="isEditing=true" class="btn btn-success">Edit</button>
+            <button v-else @click="isEditing=false" class="btn btn-success">Save</button>
           </div>
           <div class="col-1 text-left border-bottom">
             <button
