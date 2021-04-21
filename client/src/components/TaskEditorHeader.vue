@@ -7,13 +7,21 @@
     <div>
       <div class="form-group row">
         <div class="col-sm-4">
+          <form action="">
+            <label for="">Name: &nbsp; </label>
+             <input type="text" id="tname" name="tname" placeholder="New Task Name" size="25"><br>
+           </form>
         </div>
         <div class="col-sm-4">
-           <button @click="createTask" class="btn btn-primary">
-          Create New Mavenlink Task
-        </button>
+          <form action="">
+             <label for="">Description: &nbsp; </label>
+             <input type="text" id="tdesc" name="tdesc" placeholder="New Task Description" size="25"><br>
+           </form>
         </div>
          <div class="col-sm-4">
+            <button @click="createTask" class="btn btn-primary">
+          Create New Mavenlink Task
+        </button>
         </div>
       </div>
     </div>
