@@ -58,6 +58,17 @@
 
 export default {
   name: "Task",
+  data() {
+    return { 
+      isEditing: false,
+      payTotal: 0
+    };
+  },
+  methods: {
+    calculateTotal() {
+      this.payTotal = parseInt(this.newTaskHours) * parseInt(this.newTaskRate)
+    }
+  },
   props: {
     tasks: Object,
   },
