@@ -63,6 +63,7 @@ export default {
       selectedProject: "",
       created_after: "",
       created_from: "",
+      alreadyInvoiced: [],
     };
   },
   computed: {
@@ -94,11 +95,12 @@ export default {
       })
         .then((response) => {
           if (response.data.results.length == 0) {
-            alert("All the time entries have been invoiced!");
+            alert("No time entries to import!");
+          } else {
+            this.results = response.data.results;
+            this.timeEntries = response.data.time_entries;
+            this.tasks = response.data.stories;
           }
-          this.results = response.data.results;
-          this.timeEntries = response.data.time_entries;
-          this.tasks = response.data.stories;
         })
         .catch((error) => console.log(error));
     },
