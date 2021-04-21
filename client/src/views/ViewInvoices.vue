@@ -4,7 +4,7 @@
       <h1>View Invoices</h1>
     </div>
 <div v-if="isSingleInvoice">
-    <ViewInvoice :invoiceId = "invoiceId" /> 
+    <ViewInvoice :invoiceId = "invoiceId" :invoices = "invoices" :invoiceIndex = "invoiceIndex"/> 
 </div>
     <div v-else class="container-fluid">
       <div class="row">
@@ -40,7 +40,7 @@
                 name="options"
                 id="option1"
                 autocomplete="off"
-                @click="viewInvoice(invoice._id)"
+                @click="viewInvoice(invoice._id, index)"
                 checked
               />
               View
@@ -87,6 +87,7 @@ export default {
       invoices: [],
       isSingleInvoice: false,
       invoiceId: "",
+      invoiceIndex: 0
     };
   },
   computed: {},
@@ -105,9 +106,10 @@ export default {
         })
         .catch((error) => alert("Something went wrong!"));
     },
-    viewInvoice: function(invoiceId) {
+    viewInvoice: function(invoiceId, index) {
         this.isSingleInvoice = true;
         this.invoiceId = invoiceId;
+        this.invoiceIndex = index;
     }
   },
   created() {
