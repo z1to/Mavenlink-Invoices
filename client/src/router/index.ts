@@ -23,6 +23,12 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
+    path: "/task-editor",
+    name: "Task Editor",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/TaskEditor.vue"),
+  },
+  {
     path: "/create-invoice",
     name: "Create Invoice",
     // route level code-splitting

@@ -5,15 +5,18 @@
     <br />
     <h5 class="col 5">Number: INV{{ invoices[invoiceIndex].number }}</h5>
     <br />
-    <h5 class="col 5">Project: {{ projects[invoices[invoiceIndex].projectId].title }}</h5>
+    <h5 class="col 5">
+      Project: {{ projects[invoices[invoiceIndex].projectId].title }}
+    </h5>
     <br />
     <button
       type="button"
       class="btn btn-secondary btn-lg"
-      @click="$emit('go-back')">
+      @click="$emit('go-back')"
+    >
       Back
     </button>
-      <p/>
+    <p />
     <button
       v-if="isEditMode"
       type="button"
@@ -26,7 +29,13 @@
       Edit
     </button>
     <p />
-    <button type="button" class="btn btn-danger btn-lg " @click="$emit('delete-invoice')">Delete</button>
+    <button
+      type="button"
+      class="btn btn-danger btn-lg"
+      @click="$emit('delete-invoice')"
+    >
+      Delete
+    </button>
     <br />
     <br />
     <div class="row">
@@ -94,14 +103,14 @@ export default {
   data() {
     return {
       invoiceLines: [],
-      isEditMode: false
+      isEditMode: false,
     };
   },
   props: {
     invoiceId: String,
     invoiceIndex: Number,
     invoices: Array,
-    projects: Object
+    projects: Object,
   },
   computed: {
     total: function () {

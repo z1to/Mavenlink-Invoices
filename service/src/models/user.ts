@@ -102,10 +102,10 @@ export function isPasswordValid (password: string, hashedPassword: string, salt:
 * @param {string} authorization - Received bearer authorization token
 * @param {express.Response} res - Express response from API call
 */
-export function validateBearerToken(authorization: string, res: express.Response) {
+export function validateBearerToken (authorization: string, res: express.Response) {
   if (authorization === undefined) {
     res.status(400).send({ message: 'Missing token' })
-    return false;
+    return false
   }
 
   // Remove 'Bearer ' from string
@@ -115,8 +115,8 @@ export function validateBearerToken(authorization: string, res: express.Response
     jwt.verify(token, process.env.JWTSECRET)
   } catch (error) {
     res.status(403).send(error)
-    return false;
+    return false
   }
 
-  return true;
+  return true
 }
