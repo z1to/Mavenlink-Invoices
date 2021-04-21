@@ -8,18 +8,22 @@
       <div class="form-group row">
         <div class="col-sm-4">
           <form action="">
-            <label for="">Name: &nbsp; </label>
-             <input type="text" id="tname" name="tname" placeholder="New Task Name" size="25"><br>
+            <label for="">Name: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </label>
+             <input v-model="newTaskName" type="text" id="tname" name="tname" placeholder="New Task Name" size="25"><br>
+             <label for="">Description: &nbsp; </label>
+             <input v-model="newTaskDescription" type="text" id="tdesc" name="tdesc" placeholder="New Task Description" size="25"><br>
            </form>
         </div>
         <div class="col-sm-4">
           <form action="">
-             <label for="">Description: &nbsp; </label>
-             <input type="text" id="tdesc" name="tdesc" placeholder="New Task Description" size="25"><br>
+            <label for="">Hours: &nbsp; </label>
+             <input v-model="newTaskHours" type="text" id="tdesc" name="tdesc" placeholder="New Hours" size="25"><br>
+             <label for="">Rate: &nbsp; &nbsp; </label>
+             <input v-model="newTaskRate" type="text" id="tdesc" name="tdesc" placeholder="New Rate" size="25"><br>
            </form>
         </div>
          <div class="col-sm-4">
-            <button @click="createTask()" class="btn btn-primary">
+            <button @click="$emit('createTask', '35576725', newTaskName, newTaskDescription)" class="btn btn-primary">
           Create New Mavenlink Task
         </button>
         </div>
@@ -32,16 +36,21 @@
 export default {
   name: "TaskEditorHeader",
   data() {
-    return { selected: "" };
+    return { 
+      selected: "" ,
+      newTaskName: "",
+      newTaskDescription: "",
+      newTaskHours: "",
+      newTaskRate: ""
+    };
   },
   methods: {
-    getTasks(workspace_id) {
+    getTasks() {
       this.$emit(
         "get-tasks",
-        workspace_id
       );
     },
   },
-  emits: ["get-tasks"],
+  emits: ["get-tasks", "createTask"],
 };
 </script>

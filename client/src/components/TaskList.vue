@@ -43,7 +43,7 @@
             </button>
           </div>
           <div class="col-1 text-left border-bottom">
-            <button @click="$emit('deleteTask', task.id)" class="btn btn-danger">
+            <button @click="deleteTask(task.id)" class="btn btn-danger">
               Delete
             </button>
           </div>
@@ -55,6 +55,7 @@
 </template>
 
 <script>
+
 export default {
   name: "Task",
   props: {
@@ -62,6 +63,6 @@ export default {
   },
   components: {
   },
-  emits: ['deleteTask'],
+  emits: ["get-tasks"],
 };
 </script>

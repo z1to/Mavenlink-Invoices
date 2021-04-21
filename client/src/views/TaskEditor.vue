@@ -1,7 +1,9 @@
 <template>
   <div class="create-invoice">
     <b-alert show v-if="response !== ''">{{ response }}</b-alert>
-    <TaskEditorHeader/>
+    <TaskEditorHeader
+      @createTask="createTask"
+    />
     <TaskList
       :tasks="tasks" @deleteTask="deleteTask"
     />
@@ -87,19 +89,22 @@ export default {
     },
 
     //Parameters: task.name, task.description
-    createTask(workspace_id) {
-      this.selectedProject = workspace_id.project;
+    createTask(workspace_id, newTaskName, newTaskDescription, newTaskHours, newTaskRate) {
       var results = axios({
         method: "post",
-        headers: {'Authorization': `Bearer ${this.$store.state.serviceToken}`},
+        // headers: {'Authorization': `Bearer ${this.$store.state.serviceToken}`},
         url: "http://localhost:5000/tasks/mavenlink/create",
-        params: {
-          workspace_id: this.selectedProject,
+        data: {
+          workspace_id: workspace_id,
+          story_type: "task",
+          title: newTaskName,
+          description: newTaskDescription,
+          hours: newTaskHours,
+          rate: newTaskRate
         },
       })
         .then((response) => {
-          console.log(response.data);
-          this.tasks = response.data.stories;
+          this.getTasks()
         })
         .catch((error) => console.log(error));
 
