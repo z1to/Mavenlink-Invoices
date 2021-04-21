@@ -8,6 +8,13 @@
     <h5 class="col 5">Project: {{ invoices[invoiceIndex].projectId }}</h5>
     <br />
     <button
+      type="button"
+      class="btn btn-secondary btn-lg"
+      @click="$emit('go-back')">
+      Back
+    </button>
+      <p/>
+    <button
       v-if="isEditMode"
       type="button"
       class="btn btn-success btn-lg"
@@ -19,7 +26,7 @@
       Edit
     </button>
     <p />
-    <button type="button" class="btn btn-danger btn-lg">Delete</button>
+    <button type="button" class="btn btn-danger btn-lg " @click="$emit('delete-invoice')">Delete</button>
     <br />
     <br />
     <div class="row">
@@ -87,13 +94,13 @@ export default {
   data() {
     return {
       invoiceLines: [],
-      isEditMode: false,
+      isEditMode: false
     };
   },
   props: {
     invoiceId: String,
     invoiceIndex: Number,
-    invoices: Array,
+    invoices: Array
   },
   computed: {
     total: function () {
@@ -155,5 +162,6 @@ export default {
       })
       .catch((error) => alert("Something went wrong!"));
   },
+  emits: ["delete-invoice", "go-back"],
 };
 </script>
