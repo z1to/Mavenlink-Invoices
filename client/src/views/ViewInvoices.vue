@@ -8,12 +8,13 @@
         :invoiceId="invoiceId"
         :invoices="invoices"
         :invoiceIndex="invoiceIndex"
+        :projects="projects"
         @delete-invoice="onDeleteInvoice"
         @go-back="onGoBack"
       />
     </div>
     <div v-else class="container-fluid">
-        <br>
+      <br />
       <div class="col-5">
         <input
           type="text"
@@ -44,7 +45,7 @@
           </div>
           <div class="col-3 border-bottom">INV{{ invoice.number }}</div>
           <div class="col-3 border-bottom">
-            {{ invoice.projectId }}
+            {{ projects[invoice.projectId].title }}
           </div>
           <div
             class="col-3 border-bottom btn-group btn-group-toggle"
@@ -96,13 +97,21 @@ export default {
       invoiceId: "",
       invoiceIndex: 0,
       filter: "",
+      projects: {
+        35576775: {
+          title: "Engagement Restructurations 2021 | GB6536UY",
+        },
+        35576725: {
+          title: "Engagement Contrôle qualité 2021 | JK76410VB",
+        },
+      },
     };
   },
   computed: {
     filteredRows() {
       return this.invoices.filter((invoice) => {
-        const name = invoice.projectId.toString();
-        const searchTerm = this.filter.toString();
+        const name = this.projects[invoice.projectId].title.toLowerCase();
+        const searchTerm = this.filter.toLowerCase();
         return name.includes(searchTerm);
       });
     },

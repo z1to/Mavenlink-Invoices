@@ -5,7 +5,7 @@
     <br />
     <h5 class="col 5">Number: INV{{ invoices[invoiceIndex].number }}</h5>
     <br />
-    <h5 class="col 5">Project: {{ invoices[invoiceIndex].projectId }}</h5>
+    <h5 class="col 5">Project: {{ projects[invoices[invoiceIndex].projectId].title }}</h5>
     <br />
     <button
       type="button"
@@ -100,7 +100,8 @@ export default {
   props: {
     invoiceId: String,
     invoiceIndex: Number,
-    invoices: Array
+    invoices: Array,
+    projects: Object
   },
   computed: {
     total: function () {

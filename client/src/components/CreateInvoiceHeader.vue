@@ -5,20 +5,29 @@
     </div>
     <br />
     <div>
-      <div class="form-group row">
+      <div class="form-group row was-validated">
         <label for="workspace_id" class="col-sm-2 col-form-label"
           >Project</label
         >
         <div class="col-sm-3">
-          <select id="workspace_id" v-model="workspace_id" class="form-control">
-            <option :key="index" v-for="(project, index) in projects">
-              {{ project }}
+          <select
+            id="workspace_id"
+            v-model="selected"
+            class="form-control is-invalid"
+            required
+          >
+            <option
+              :key="index"
+              :value="project.id"
+              v-for="(project, index) in projects"
+            >
+              {{ project.title }}
             </option>
           </select>
         </div>
       </div>
       <div>
-        <div class="form-group row">
+        <div class="form-group row was-validated">
           <label
             id="created_after"
             for="created_after"
@@ -26,10 +35,15 @@
             >From</label
           >
           <div class="col-sm-3">
-            <input class="form-control" type="date" v-model="created_after" />
+            <input
+              class="form-control is-invalid"
+              type="date"
+              v-model="created_after"
+              required
+            />
           </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group row was-validated">
           <label
             id="created_before"
             for="created_before"
@@ -37,14 +51,19 @@
             >To</label
           >
           <div class="col-sm-3">
-            <input class="form-control" type="date" v-model="created_before" />
+            <input
+              class="form-control is-invalid"
+              type="date"
+              v-model="created_before"
+              required
+            />
           </div>
         </div>
         <div class="form-group row">
           <div class="col-sm-2">
             <button
               class="btn btn-primary"
-              @click="onImportTime(workspace_id, created_after, created_before)"
+              @click="onImportTime(selected, created_after, created_before)"
             >
               Import Time
             </button>
