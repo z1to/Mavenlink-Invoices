@@ -31,11 +31,36 @@
         <div class="row">
           <div class="col-1 border-bottom"></div>
           <div class="col-6 text-left border-bottom">
-            <p>Task title: {{ task.title }}</p>
-            <p>Task description: {{ task.description }}</p>
+            <div v-if="isEditing==false">
+              Task title: {{ task.title }}
+            </div>
+            <div v-else>
+              <input
+              v-model="editTaskName"
+              type="text"
+              placeholder="New Task Name"
+              size="20"
+            />
+            </div>
+            <p></p>
+            <div v-if="isEditing==false">
+              Task description: {{ task.description }}
+            </div>
+            <div v-else>
+              <input
+              v-model="editTaskDesc"
+              type="text"
+              placeholder="New Task Description"
+              size="20"
+            />
+            </div>
           </div>
           <div class="col-1 text-left border-bottom">
+            <div v-if="isEditing==false">
+              {{task.hours}}
+            </div>
             <input
+              v-else
               v-model="newTaskHours"
               type="text"
               placeholder="Hours"
@@ -43,7 +68,11 @@
             /><br />
           </div>
           <div class="col-1 text-left border-bottom">
+            <div v-if="isEditing==false">
+              {{task.rate}}
+            </div>
             <input
+              v-else
               v-model="newTaskRate"
               type="text"
               placeholder="Rate"
