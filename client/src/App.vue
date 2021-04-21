@@ -7,6 +7,8 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
     <router-link to="/task-editor">Task Editor</router-link> |
+    <router-link to="/create-invoice">Create Invoice</router-link> |
+    <router-link to="/view-invoices">View Invoices</router-link> |
     <router-link to="/logout">Logout</router-link>
   </div>
   <router-view />

@@ -6,8 +6,8 @@ const router = express.Router()
 
 // Get a list of tasks from Mavenlink
 router.get("/mavenlink", async (req, res) => {
-    // if (!validateBearerToken(req.headers.authorization, res))
-    //     return;
+    if (!validateBearerToken(req.headers.authorization, res))
+        return;
 
     const options = {
         headers: {
@@ -34,8 +34,9 @@ function buildQueryString(params) {
 
 // Create a task in Mavenlink
 router.post("/mavenlink/create", async (req, res) => {
-    // if (!validateBearerToken(req.headers.authorization, res))
-    //     return;
+    if (!validateBearerToken(req.headers.authorization, res))
+        return;
+
     const options = {
         headers: {
             Authorization: "Bearer " + process.env.MAVENLINK_TOKEN
@@ -44,15 +45,13 @@ router.post("/mavenlink/create", async (req, res) => {
 
     await axios.post(process.env.MAVENLINK_TASK_URL, req.body, options)
         .then(response => res.status(200).send(response.status))
-        .catch(error => {
-            console.log(error)
-            res.status(400).send(error)});
+        .catch(error => res.status(400).send(error));
 });
 
 // Update task in Mavenlink
 router.put("/mavenlink/update", async (req, res) => {
-    // if (!validateBearerToken(req.headers.authorization, res))
-    //     return;
+    if (!validateBearerToken(req.headers.authorization, res))
+        return;
 
     const options = {
         headers: {
@@ -67,8 +66,8 @@ router.put("/mavenlink/update", async (req, res) => {
 
 // Delete a task in Mavenlink
 router.delete("/mavenlink/delete", async (req, res) => {
-    // if (!validateBearerToken(req.headers.authorization, res))
-    //     return;
+    if (!validateBearerToken(req.headers.authorization, res))
+        return;
 
     const options = {
         headers: {

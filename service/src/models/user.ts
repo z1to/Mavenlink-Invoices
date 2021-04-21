@@ -118,5 +118,5 @@ export function validateBearerToken(authorization: string, res: express.Response
     return false;
   }
 
-  return true
+  return true;
 }
