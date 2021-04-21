@@ -1,8 +1,9 @@
 <template>
   <div class="create-invoice">
+    <b-alert show v-if="response !== ''">{{ response }}</b-alert>
     <TaskEditorHeader/>
     <TaskList
-      :tasks="tasks"
+      :tasks="tasks" @deleteTask="deleteTask"
     />
     <div class="container-fluid">
       <div class="row d-flex justify-content-center">
@@ -27,6 +28,7 @@ export default {
     return {
       tasks: [],
       selectedProject: "",
+      response: "",
     };
   },
   methods: {
@@ -45,20 +47,21 @@ export default {
       console.log(results);
     },
 
-    deleteTask(workspace_id) {
+     deleteTask(workspace_id) {
       this.selectedProject = workspace_id.project;
       var results = axios({
         method: "delete",
         headers: {'Authorization': `Bearer ${this.$store.state.serviceToken}`},
-        url: "http://localhost:5000/tasks/mavenlink/delete"+workspace_id,
-        params: {
-          workspace_id: this.selectedProject,
-        },
+        url: "http://localhost:5000/tasks/mavenlink/delete?id="+workspace_id,
       })
         .then(() => {
+          this.response = "Task was successfully deleted";
           this.getTasks();
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          this.response = "Task unable to be deleted";
+          console.log(error)
+        });
 
       console.log(results);
     },
