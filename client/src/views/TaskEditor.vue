@@ -74,7 +74,7 @@ export default {
     updateTask(workspace_id) {
       this.selectedProject = workspace_id.project;
       var results = axios({
-        method: "post",
+        method: "put",
         headers: {'Authorization': `Bearer ${this.$store.state.serviceToken}`},
         url: "http://localhost:5000/tasks/mavenlink/update",
         params: {
