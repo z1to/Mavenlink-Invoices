@@ -1,24 +1,24 @@
-import { model, Schema, Model, Document } from 'mongoose';
+import { model, Schema, Model, Document } from 'mongoose'
 const mongoose = require('mongoose')
-const AutoIncrement = require('mongoose-sequence')(mongoose);
+const AutoIncrement = require('mongoose-sequence')(mongoose)
 
 export interface IInvoice extends Document {
     invoiceDate: Date,
-    projectId: Number,
-    number: Number
+    projectId: number,
+    number: number
 }
 
 const invoiceSchema: Schema = new Schema({
-    invoiceDate: {
-        type: String,
-        required: true
-    },
-    projectId: {
-        type: Number,
-        required: true
-    },
-    number: Number
-});
+  invoiceDate: {
+    type: String,
+    required: true
+  },
+  projectId: {
+    type: Number,
+    required: true
+  },
+  number: Number
+})
 
-invoiceSchema.plugin(AutoIncrement, { inc_field: 'number' });
-export const Invoice: Model<IInvoice> = model('Invoice', invoiceSchema);
+invoiceSchema.plugin(AutoIncrement, { inc_field: 'number' })
+export const Invoice: Model<IInvoice> = model('Invoice', invoiceSchema)
