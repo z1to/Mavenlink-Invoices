@@ -79,9 +79,7 @@ export default {
         url: "http://localhost:5000/tasks/time",
         headers: { 'Authorization': `Bearer ${this.$store.state.serviceToken}` },
         params: {
-          workspace_id: workspace_id,
-          created_after: created_after,
-          created_before: created_before,
+          include: 'story'
         },
       })
         .then((response) => {
