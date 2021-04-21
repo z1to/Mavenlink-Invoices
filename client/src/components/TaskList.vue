@@ -29,10 +29,10 @@
             <p>Task description: {{ task.description }}</p>
           </div>
           <div class="col-1 text-left border-bottom">
-            <input type="text" id="fname" name="fname" placeholder="Hours" size="5"><br>
+            <input v-model="newTaskHours" type="text" id="fname" name="fname" placeholder="Hours" size="5"><br>
           </div>
           <div class="col-1 text-left border-bottom">
-            <input type="text" id="fname" name="fname" placeholder="Rate" size="5"><br>
+            <input v-model="newTaskRate" type="text" id="fname" name="fname" placeholder="Rate" size="5"><br>
           </div>
           <div class="col-1 text-left border-bottom">
             $0.00
