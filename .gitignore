@@ -1,5 +1,8 @@
 # Source: https://github.com/github/gitignore/blob/master/Node.gitignore
 
+# Apple
+.DS_Store
+
 # Logs
 logs
 *.log
