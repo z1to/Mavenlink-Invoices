@@ -1,5 +1,14 @@
 import { ITask, Task } from '../models/task'
 
+export async function get (ids: Array<string>): Promise<ITask[]> {
+  try {
+    const tasks = await Task.find({ mavenlinkId: { $in: ids } });
+    return tasks;
+  } catch (error) {
+    throw new Error('Could not get tasks')
+  }
+}
+
 export async function create (task: ITask): Promise<string> {
   try {
     if (task === undefined || task?.mavenlinkId === undefined || task?.rate === undefined) { throw new Error('Task could not be created. Empty properties were passed.') }
