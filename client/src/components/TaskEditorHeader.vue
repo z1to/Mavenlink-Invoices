@@ -30,15 +30,6 @@
         </div>
         <div class="col-sm-4">
           <form action="">
-            <label for="">Hours: &nbsp; </label>
-            <input
-              v-model="newTaskHours"
-              type="text"
-              id="thours"
-              name="thours"
-              placeholder="New Hours"
-              size="25"
-            /><br />
             <label for="">Rate: &nbsp; &nbsp; </label>
             <input
               v-model="newTaskRate"
@@ -73,7 +64,6 @@ export default {
       selected: "",
       newTaskName: "",
       newTaskDescription: "",
-      newTaskHours: "",
       newTaskRate: "",
     };
   },

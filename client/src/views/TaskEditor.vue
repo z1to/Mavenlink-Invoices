@@ -65,23 +65,20 @@ export default {
 
     //Parameters: workspace_id, newTask.name, newTask.description
     updateTask(
-      workspace_id,
+      taskID,
       editTaskName,
       editTaskDesc,
-      editTaskHours,
-      editTaskRate
+      editTaskRate,
     ) {
-      this.selectedProject = workspace_id.project;
+      console.log(taskID)
       var results = axios({
         method: "put",
         headers: { Authorization: `Bearer ${this.$store.state.serviceToken}` },
-        url: "http://localhost:5000/tasks/mavenlink/update",
+        url: "http://localhost:5000/tasks/mavenlink/update?id="+taskID,
         data: {
-          workspace_id: workspace_id,
           story_type: "task",
           title: editTaskName,
           description: editTaskDesc,
-          hours: editTaskHours,
           rate: editTaskRate,
         },
       })
@@ -96,9 +93,10 @@ export default {
       workspace_id,
       newTaskName,
       newTaskDescription,
-      newTaskHours,
       newTaskRate
-    ) {
+    ) 
+    {
+      console.log(workspace_id)
       var results = axios({
         method: "post",
         headers: { Authorization: `Bearer ${this.$store.state.serviceToken}` },
@@ -108,7 +106,6 @@ export default {
           story_type: "task",
           title: newTaskName,
           description: newTaskDescription,
-          hours: newTaskHours,
           rate: newTaskRate,
         },
       })

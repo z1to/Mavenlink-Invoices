@@ -7,7 +7,7 @@
       <div
         class="col-1 font-weight-bold p-3 mb-2 bg-secondary text-white text-left"
       >
-        Hours
+        
       </div>
       <div
         class="col-1 font-weight-bold p-3 mb-2 bg-secondary text-white text-left"
@@ -17,7 +17,7 @@
       <div
         class="col-1 font-weight-bold p-3 mb-2 bg-secondary text-white text-left"
       >
-        Total
+       
       </div>
       <div
         class="col-2 font-weight-bold p-3 mb-2 bg-secondary text-white text-center"
@@ -61,16 +61,7 @@
             </div>
           </div>
           <div class="col-1 text-left border-bottom">
-            <div v-if="isEditing == false">
-              {{ task.hours }}
-            </div>
-            <input
-              v-else
-              v-model="task.hours"
-              type="text"
-              placeholder="Hours"
-              size="5"
-            /><br />
+            
           </div>
           <div class="col-1 text-left border-bottom">
             <div v-if="isEditing == false">
@@ -85,7 +76,6 @@
             /><br />
           </div>
           <div class="col-1 text-left border-bottom">
-            {{parseInt(task.hours)*parseInt(task.rate)}}
           </div>
           <div class="col-1 text-left border-bottom">
             <button
@@ -95,7 +85,7 @@
             >
               Edit
             </button>
-            <button v-else @click="isEditingToggle()" class="btn btn-success">
+            <button v-else @click="isEditingToggle(task.id,task.title,task.description,task.rate)" class="btn btn-success">
               Save
             </button>
           </div>
@@ -119,30 +109,24 @@ export default {
   name: "Task",
   data() {
     return {
-      newTaskHours: 0,
       newTaskRate: 0,
       editTaskName: null,
       editTaskDesc: null,
-      editTaskHours: null,
       editTaskRate: null,
       isEditing: false,
       payTotal: 0,
     };
   },
   methods: {
-    calculateTotal() {
-      return (this.payTotal =
-        parseInt(this.newTaskHours) * parseInt(this.newTaskRate));
-    },
-    isEditingToggle() {
+    isEditingToggle(taskID,taskTitle,taskDesc,taskRate) {
       if (this.isEditing) {
         this.isEditing = !this.isEditing;
         this.$emit(
           "updateTask",
-          this.editTaskName,
-          this.editTaskDesc,
-          this.editTaskHours,
-          this.editTaskRate
+          taskID,
+          taskTitle,
+          taskDesc,
+          taskRate
         );
       }
     },
