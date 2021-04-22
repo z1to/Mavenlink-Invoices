@@ -40,7 +40,7 @@
                 &nbsp;</label
               >
               <input
-                v-model="this.editTaskName"
+                v-model="task.title"
                 type="text"
                 placeholder="New Task Title"
                 size="20"
@@ -53,7 +53,7 @@
             <div v-else>
               <label for="">Task Description: &nbsp; </label>
               <input
-                v-model="this.editTaskDesc"
+                v-model="task.description"
                 type="text"
                 placeholder="New Task Description"
                 size="20"
@@ -66,7 +66,7 @@
             </div>
             <input
               v-else
-              v-model="this.editTaskHours"
+              v-model="task.hours"
               type="text"
               placeholder="Hours"
               size="5"
@@ -78,17 +78,19 @@
             </div>
             <input
               v-else
-              v-model="this.editTaskRate"
+              v-model="task.rate"
               type="text"
               placeholder="Rate"
               size="5"
             /><br />
           </div>
-          <div class="col-1 text-left border-bottom">$0.00</div>
+          <div class="col-1 text-left border-bottom">
+            {{parseInt(task.hours)*parseInt(task.rate)}}
+          </div>
           <div class="col-1 text-left border-bottom">
             <button
               v-if="isEditing == false"
-              @click="isEditingToggle()"
+              @click="isEditing = true"
               class="btn btn-success"
             >
               Edit
@@ -134,6 +136,7 @@ export default {
     },
     isEditingToggle() {
       if (this.isEditing) {
+        this.isEditing = !this.isEditing;
         this.$emit(
           "updateTask",
           this.editTaskName,
@@ -142,7 +145,6 @@ export default {
           this.editTaskRate
         );
       }
-      this.isEditing = !this.isEditing;
     },
   },
   props: {
