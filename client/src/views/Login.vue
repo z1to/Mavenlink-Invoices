@@ -58,7 +58,7 @@ async function login() {
           default:
             this.$store.commit("setAuthorization", true);
             this.$store.commit("setServiceToken", this.token);
-            return router.push("/");
+            return router.push("/task-editor");
         }
       }
     })
@@ -80,7 +80,7 @@ async function login() {
   created() {
     // If already authorized redirect to home
     if (this.$store.state.authorized == true) {
-      return router.push("/");
+      return router.push("/task-editor");
     }
   },
   methods: {

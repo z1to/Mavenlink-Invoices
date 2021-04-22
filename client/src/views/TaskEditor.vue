@@ -4,7 +4,11 @@
       {{ response }}
     </div>
     <TaskEditorHeader @createTask="createTask" />
-    <TaskList :tasks="tasks" @deleteTask="deleteTask" />
+    <TaskList
+      :tasks="tasks"
+      @deleteTask="deleteTask"
+      @updateTask="updateTask"
+    />
     <div class="container-fluid">
       <div class="row d-flex justify-content-center"></div>
       <br />
@@ -55,35 +59,28 @@ export default {
         })
         .catch((error) => {
           this.response = "Task unable to be deleted";
-          console.log(error);
         });
     },
 
-    //Parameters: workspace_id, newTask.name, newTask.description
-    updateTask(workspace_id) {
-      this.selectedProject = workspace_id.project;
+    updateTask(taskID, editTaskName, editTaskDesc, editTaskRate) {
       var results = axios({
         method: "put",
         headers: { Authorization: `Bearer ${this.$store.state.serviceToken}` },
-        url: "http://localhost:5000/tasks/mavenlink/update",
-        params: {
-          workspace_id: this.selectedProject,
+        url: "http://localhost:5000/tasks/mavenlink/update?id=" + taskID,
+        data: {
+          story_type: "task",
+          title: editTaskName,
+          description: editTaskDesc,
+          rate: editTaskRate,
         },
       })
         .then((response) => {
-          this.tasks = response.data.stories;
+          this.getTasks();
         })
         .catch((error) => console.log(error));
     },
 
-    //Parameters: task.name, task.description
-    createTask(
-      workspace_id,
-      newTaskName,
-      newTaskDescription,
-      newTaskHours,
-      newTaskRate
-    ) {
+    createTask(workspace_id, newTaskName, newTaskDescription, newTaskRate) {
       var results = axios({
         method: "post",
         headers: { Authorization: `Bearer ${this.$store.state.serviceToken}` },
@@ -93,7 +90,6 @@ export default {
           story_type: "task",
           title: newTaskName,
           description: newTaskDescription,
-          hours: newTaskHours,
           rate: newTaskRate,
         },
       })

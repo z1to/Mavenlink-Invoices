@@ -107,7 +107,15 @@ router.delete('/mavenlink/delete', async (req, res) => {
     }
   }
   await axios.delete(process.env.MAVENLINK_TASK_URL + '/' + req.query.id, options)
-    .then(response => res.status(200).send(response.status))
+    .then(() =>  {
+      // try {
+      //   delete (req.query.id)
+      // } catch (error) {
+      //   return res.status(400).send({ error: error.message })
+      // }
+
+      return res.sendStatus(200)
+    })
     .catch(error => res.status(400).send(error))
 })
 

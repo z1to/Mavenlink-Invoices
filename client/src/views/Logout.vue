@@ -14,7 +14,7 @@ import router from "@/router/index.ts";
 
     this.$store.commit("setAuthorization", false);
     this.$store.commit("setServiceToken", "");
-    return router.push("/");
+    return router.push("/login");
   },
 })
 export default class Logout extends Vue {}

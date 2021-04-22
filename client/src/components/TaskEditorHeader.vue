@@ -6,7 +6,8 @@
     <br />
     <div>
       <div class="form-group row">
-        <div class="col-sm-4">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
           <form action="">
             <label for="">Name: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </label>
             <input
@@ -27,39 +28,33 @@
               size="25"
             /><br />
           </form>
-        </div>
-        <div class="col-sm-4">
           <form action="">
-            <label for="">Hours: &nbsp; </label>
-            <input
-              v-model="newTaskHours"
-              type="text"
-              id="thours"
-              name="thours"
-              placeholder="New Hours"
-              size="25"
-            /><br />
             <label for="">Rate: &nbsp; &nbsp; </label>
             <input
               v-model="newTaskRate"
-              type="text"
+              type="number"
               id="trate"
               name="trate"
               placeholder="New Rate"
-              size="25"
+              size="10"
             /><br />
           </form>
-        </div>
-        <div class="col-sm-4">
           <button
             @click="
-              $emit('createTask', '35576725', newTaskName, newTaskDescription)
+              $emit(
+                'createTask',
+                '35576725',
+                newTaskName,
+                newTaskDescription,
+                newTaskRate
+              )
             "
             class="btn btn-primary"
           >
             Create New Mavenlink Task
           </button>
         </div>
+        <div class="col-sm-3"></div>
       </div>
     </div>
   </header>
@@ -73,7 +68,6 @@ export default {
       selected: "",
       newTaskName: "",
       newTaskDescription: "",
-      newTaskHours: "",
       newTaskRate: "",
     };
   },
