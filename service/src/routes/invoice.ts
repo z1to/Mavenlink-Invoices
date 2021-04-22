@@ -17,7 +17,7 @@ router.get('', async (req, res) => {
 // Get a list of invoices lines
 router.get('/invoiceLines', async (req, res) => {
   if (!validateBearerToken(req.headers.authorization, res)) { return }
-  console.log(req.query)
+
   InvoiceController.getInvoiceLines(req.query)
     .then(result => res.status(200).send(result))
     .catch(err => res.status(400).send(err))
