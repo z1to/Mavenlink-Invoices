@@ -44,6 +44,7 @@ mongoose.connect('mongodb://localhost/' + process.env.DB + '?authSource=admin',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
     user: process.env.DBUSER,
     pass: process.env.DBPASSWORD
   })
