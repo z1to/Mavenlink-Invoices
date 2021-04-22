@@ -13,7 +13,7 @@ export async function create (task: ITask): Promise<string> {
   try {
     if (task === undefined || task?.mavenlinkId === undefined || task?.rate === undefined) { throw new Error('Task could not be created. Empty properties were passed.') }
 
-    // Create user
+    // Delete user
     await Task.create({
       mavenlinkId: task.mavenlinkId,
       rate: task.rate
@@ -50,5 +50,18 @@ export async function update (task: ITask): Promise<string> {
     }
 
     throw new Error('Task update could not be processed')
+  }
+}
+
+export async function destroy (mavenlinkId: string): Promise<string> {
+  try {
+    // Delete task
+    await Task.deleteOne({
+      mavenlinkId: mavenlinkId,
+    })
+
+    return 'Success'
+  } catch (error) {
+    throw new Error('Task creation could not be processed')
   }
 }
