@@ -62,16 +62,11 @@ export default {
         });
     },
 
-    updateTask(
-      taskID,
-      editTaskName,
-      editTaskDesc,
-      editTaskRate,
-    ) {
+    updateTask(taskID, editTaskName, editTaskDesc, editTaskRate) {
       var results = axios({
         method: "put",
         headers: { Authorization: `Bearer ${this.$store.state.serviceToken}` },
-        url: "http://localhost:5000/tasks/mavenlink/update?id="+taskID,
+        url: "http://localhost:5000/tasks/mavenlink/update?id=" + taskID,
         data: {
           story_type: "task",
           title: editTaskName,
@@ -85,12 +80,7 @@ export default {
         .catch((error) => console.log(error));
     },
 
-    createTask(
-      workspace_id,
-      newTaskName,
-      newTaskDescription,
-      newTaskRate
-    ) {
+    createTask(workspace_id, newTaskName, newTaskDescription, newTaskRate) {
       var results = axios({
         method: "post",
         headers: { Authorization: `Bearer ${this.$store.state.serviceToken}` },

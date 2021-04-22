@@ -6,9 +6,7 @@
       </div>
       <div
         class="col-1 font-weight-bold p-3 mb-2 bg-secondary text-white text-left"
-      >
-
-      </div>
+      ></div>
       <div
         class="col-1 font-weight-bold p-3 mb-2 bg-secondary text-white text-left"
       >
@@ -16,9 +14,7 @@
       </div>
       <div
         class="col-1 font-weight-bold p-3 mb-2 bg-secondary text-white text-left"
-      >
-
-      </div>
+      ></div>
       <div
         class="col-2 font-weight-bold p-3 mb-2 bg-secondary text-white text-center"
       >
@@ -60,9 +56,7 @@
               />
             </div>
           </div>
-          <div class="col-1 text-left border-bottom">
-
-          </div>
+          <div class="col-1 text-left border-bottom"></div>
           <div class="col-1 text-left border-bottom">
             <div v-if="isEditing == false">
               {{ task.rate }}
@@ -75,8 +69,7 @@
               size="5"
             /><br />
           </div>
-          <div class="col-1 text-left border-bottom">
-          </div>
+          <div class="col-1 text-left border-bottom"></div>
           <div class="col-1 text-left border-bottom">
             <button
               v-if="isEditing == false"
@@ -85,7 +78,18 @@
             >
               Edit
             </button>
-            <button v-else @click="isEditingToggle(task.id,task.title,task.description,task.rate)" class="btn btn-success">
+            <button
+              v-else
+              @click="
+                isEditingToggle(
+                  task.id,
+                  task.title,
+                  task.description,
+                  task.rate
+                )
+              "
+              class="btn btn-success"
+            >
               Save
             </button>
           </div>
@@ -118,16 +122,10 @@ export default {
     };
   },
   methods: {
-    isEditingToggle(taskID,taskTitle,taskDesc,taskRate) {
+    isEditingToggle(taskID, taskTitle, taskDesc, taskRate) {
       if (this.isEditing) {
         this.isEditing = !this.isEditing;
-        this.$emit(
-          "updateTask",
-          taskID,
-          taskTitle,
-          taskDesc,
-          taskRate
-        );
+        this.$emit("updateTask", taskID, taskTitle, taskDesc, taskRate);
       }
     },
   },

@@ -6,9 +6,7 @@
     <br />
     <div>
       <div class="form-group row">
-        <div class="col-sm-3">
-
-        </div>
+        <div class="col-sm-3"></div>
         <div class="col-sm-6">
           <form action="">
             <label for="">Name: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </label>
@@ -43,15 +41,20 @@
           </form>
           <button
             @click="
-              $emit('createTask', '35576725', newTaskName, newTaskDescription, newTaskRate)
+              $emit(
+                'createTask',
+                '35576725',
+                newTaskName,
+                newTaskDescription,
+                newTaskRate
+              )
             "
             class="btn btn-primary"
           >
             Create New Mavenlink Task
           </button>
         </div>
-        <div class="col-sm-3">
-        </div>
+        <div class="col-sm-3"></div>
       </div>
     </div>
   </header>
