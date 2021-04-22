@@ -31,35 +31,38 @@
         <div class="row">
           <div class="col-1 border-bottom"></div>
           <div class="col-6 text-left border-bottom">
-            <div v-if="this.isEditing==false">
+            <div v-if="this.isEditing == false">
               Task title: {{ task.title }}
             </div>
             <div v-else>
-              <label for="">Task Title: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</label>
+              <label for=""
+                >Task Title: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp;</label
+              >
               <input
-              v-model="this.editTaskName"
-              type="text"
-              placeholder="New Task Title"
-              size="20"
-            />
+                v-model="this.editTaskName"
+                type="text"
+                placeholder="New Task Title"
+                size="20"
+              />
             </div>
             <p></p>
-            <div v-if="isEditing==false">
+            <div v-if="isEditing == false">
               Task description: {{ task.description }}
             </div>
             <div v-else>
               <label for="">Task Description: &nbsp; </label>
               <input
-              v-model="this.editTaskDesc"
-              type="text"
-              placeholder="New Task Description"
-              size="20"
-            />
+                v-model="this.editTaskDesc"
+                type="text"
+                placeholder="New Task Description"
+                size="20"
+              />
             </div>
           </div>
           <div class="col-1 text-left border-bottom">
-            <div v-if="isEditing==false">
-              {{task.hours}}
+            <div v-if="isEditing == false">
+              {{ task.hours }}
             </div>
             <input
               v-else
@@ -70,8 +73,8 @@
             /><br />
           </div>
           <div class="col-1 text-left border-bottom">
-            <div v-if="isEditing==false">
-              {{task.rate}}
+            <div v-if="isEditing == false">
+              {{ task.rate }}
             </div>
             <input
               v-else
@@ -83,8 +86,16 @@
           </div>
           <div class="col-1 text-left border-bottom">$0.00</div>
           <div class="col-1 text-left border-bottom">
-            <button v-if="isEditing==false" @click="isEditingToggle()" class="btn btn-success">Edit</button>
-            <button v-else @click="isEditingToggle()" class="btn btn-success">Save</button>
+            <button
+              v-if="isEditing == false"
+              @click="isEditingToggle()"
+              class="btn btn-success"
+            >
+              Edit
+            </button>
+            <button v-else @click="isEditingToggle()" class="btn btn-success">
+              Save
+            </button>
           </div>
           <div class="col-1 text-left border-bottom">
             <button
@@ -109,7 +120,7 @@ export default {
       newTaskHours: null,
       newTaskRate: null,
       editTaskName: null,
-      editTaskDesc:null,
+      editTaskDesc: null,
       editTaskHours: null,
       editTaskRate: null,
       isEditing: false,
@@ -118,19 +129,26 @@ export default {
   },
   methods: {
     calculateTotal() {
-      return this.payTotal = parseInt(this.newTaskHours) * parseInt(this.newTaskRate);
+      return (this.payTotal =
+        parseInt(this.newTaskHours) * parseInt(this.newTaskRate));
     },
-    isEditingToggle(){
-      if(isEditing){
-        this.$emits("updateTask",editTaskName,editTaskDesc,editTaskHours,editTaskRate)
+    isEditingToggle() {
+      if (this.isEditing) {
+        this.$emits(
+          "updateTask",
+          this.editTaskName,
+          this.editTaskDesc,
+          this.editTaskHours,
+          this.editTaskRate
+        );
       }
-      this.isEditing = !this.isEditing
-    }
+      this.isEditing = !this.isEditing;
+    },
   },
   props: {
     tasks: Object,
   },
   components: {},
-  emits: ["get-tasks", "deleteTask","updateTask"],
+  emits: ["get-tasks", "deleteTask", "updateTask"],
 };
 </script>
