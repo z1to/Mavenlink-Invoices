@@ -31,13 +31,13 @@
         <div class="row">
           <div class="col-1 border-bottom"></div>
           <div class="col-6 text-left border-bottom">
-            <div v-if="isEditing==false">
+            <div v-if="this.isEditing==false">
               Task title: {{ task.title }}
             </div>
             <div v-else>
-              <label for="">Title: &nbsp; </label>
+              <label for="">Task Title: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</label>
               <input
-              v-model="editTaskName"
+              v-model="this.editTaskName"
               type="text"
               placeholder="New Task Title"
               size="20"
@@ -48,9 +48,9 @@
               Task description: {{ task.description }}
             </div>
             <div v-else>
-              <label for="">Description: &nbsp; </label>
+              <label for="">Task Description: &nbsp; </label>
               <input
-              v-model="editTaskDesc"
+              v-model="this.editTaskDesc"
               type="text"
               placeholder="New Task Description"
               size="20"
@@ -63,7 +63,7 @@
             </div>
             <input
               v-else
-              v-model="editTaskHours"
+              v-model="this.editTaskHours"
               type="text"
               placeholder="Hours"
               size="5"
@@ -75,7 +75,7 @@
             </div>
             <input
               v-else
-              v-model="editTaskRate"
+              v-model="this.editTaskRate"
               type="text"
               placeholder="Rate"
               size="5"
@@ -83,8 +83,8 @@
           </div>
           <div class="col-1 text-left border-bottom">$0.00</div>
           <div class="col-1 text-left border-bottom">
-            <button v-if="isEditing==false" @click="isEditing=true" class="btn btn-success">Edit</button>
-            <button v-else @click="isEditing=false" class="btn btn-success">Save</button>
+            <button v-if="isEditing==false" @click="isEditingToggle()" class="btn btn-success">Edit</button>
+            <button v-else @click="isEditingToggle()" class="btn btn-success">Save</button>
           </div>
           <div class="col-1 text-left border-bottom">
             <button
@@ -108,19 +108,29 @@ export default {
     return {
       newTaskHours: null,
       newTaskRate: null,
+      editTaskName: null,
+      editTaskDesc:null,
+      editTaskHours: null,
+      editTaskRate: null,
       isEditing: false,
       payTotal: 0,
     };
   },
   methods: {
     calculateTotal() {
-      this.payTotal = parseInt(this.newTaskHours) * parseInt(this.newTaskRate);
+      return this.payTotal = parseInt(this.newTaskHours) * parseInt(this.newTaskRate);
     },
+    isEditingToggle(){
+      if(isEditing){
+        this.$emits("updateTask",editTaskName,editTaskDesc,editTaskHours,editTaskRate)
+      }
+      this.isEditing = !this.isEditing
+    }
   },
   props: {
     tasks: Object,
   },
   components: {},
-  emits: ["get-tasks", "deleteTask"],
+  emits: ["get-tasks", "deleteTask","updateTask"],
 };
 </script>

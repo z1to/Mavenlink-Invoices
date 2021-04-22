@@ -4,7 +4,7 @@
       {{ response }}
     </div>
     <TaskEditorHeader @createTask="createTask" />
-    <TaskList :tasks="tasks" @deleteTask="deleteTask" />
+    <TaskList :tasks="tasks" @deleteTask="deleteTask" @updateTask="updateTask" />
     <div class="container-fluid">
       <div class="row d-flex justify-content-center"></div>
       <br />
