@@ -7,7 +7,7 @@
       <div
         class="col-1 font-weight-bold p-3 mb-2 bg-secondary text-white text-left"
       >
-        
+
       </div>
       <div
         class="col-1 font-weight-bold p-3 mb-2 bg-secondary text-white text-left"
@@ -17,7 +17,7 @@
       <div
         class="col-1 font-weight-bold p-3 mb-2 bg-secondary text-white text-left"
       >
-       
+
       </div>
       <div
         class="col-2 font-weight-bold p-3 mb-2 bg-secondary text-white text-center"
@@ -61,7 +61,7 @@
             </div>
           </div>
           <div class="col-1 text-left border-bottom">
-            
+
           </div>
           <div class="col-1 text-left border-bottom">
             <div v-if="isEditing == false">
@@ -70,7 +70,7 @@
             <input
               v-else
               v-model="task.rate"
-              type="text"
+              type="number"
               placeholder="Rate"
               size="5"
             /><br />

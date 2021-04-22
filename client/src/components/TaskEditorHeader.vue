@@ -6,6 +6,9 @@
     <br />
     <div>
       <div class="form-group row">
+        <div class="col-sm-3">
+
+        </div>
         <div class="col-sm-6">
           <form action="">
             <label for="">Name: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </label>
@@ -31,7 +34,7 @@
             <label for="">Rate: &nbsp; &nbsp; </label>
             <input
               v-model="newTaskRate"
-              type="text"
+              type="number"
               id="trate"
               name="trate"
               placeholder="New Rate"
