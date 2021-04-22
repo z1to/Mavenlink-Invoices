@@ -117,8 +117,8 @@ export default {
   name: "Task",
   data() {
     return {
-      newTaskHours: null,
-      newTaskRate: null,
+      newTaskHours: 0,
+      newTaskRate: 0,
       editTaskName: null,
       editTaskDesc: null,
       editTaskHours: null,
@@ -134,7 +134,7 @@ export default {
     },
     isEditingToggle() {
       if (this.isEditing) {
-        this.$emits(
+        this.$emit(
           "updateTask",
           this.editTaskName,
           this.editTaskDesc,
