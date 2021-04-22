@@ -59,18 +59,15 @@ export default {
         })
         .catch((error) => {
           this.response = "Task unable to be deleted";
-          console.log(error);
         });
     },
 
-    //Parameters: workspace_id, newTask.name, newTask.description
     updateTask(
       taskID,
       editTaskName,
       editTaskDesc,
       editTaskRate,
     ) {
-      console.log(taskID)
       var results = axios({
         method: "put",
         headers: { Authorization: `Bearer ${this.$store.state.serviceToken}` },
@@ -88,15 +85,12 @@ export default {
         .catch((error) => console.log(error));
     },
 
-    //Parameters: task.name, task.description
     createTask(
       workspace_id,
       newTaskName,
       newTaskDescription,
       newTaskRate
-    ) 
-    {
-      console.log(workspace_id)
+    ) {
       var results = axios({
         method: "post",
         headers: { Authorization: `Bearer ${this.$store.state.serviceToken}` },

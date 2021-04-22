@@ -70,8 +70,7 @@ router.post('/mavenlink/create', async (req, res) => {
 // Update task in Mavenlink
 router.put('/mavenlink/update', async (req, res) => {
   if (!validateBearerToken(req.headers.authorization, res)) { return }
-    console.log(req.query.id)
-    console.log(req.body)
+
   const options = {
     headers: {
       Authorization: 'Bearer ' + process.env.MAVENLINK_TOKEN
