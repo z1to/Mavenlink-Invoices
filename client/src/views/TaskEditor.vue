@@ -90,7 +90,7 @@ export default {
           story_type: "task",
           title: newTaskName,
           description: newTaskDescription,
-          rate: newTaskRate,
+          rate: 10, //Static rate variable (temporary)
         },
       })
         .then((response) => {

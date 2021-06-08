@@ -1,25 +1,16 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-7 font-weight-bold p-3 mb-2 bg-secondary text-white">
+      <div class="col-8 font-weight-bold p-3 mb-2 bg-secondary text-white">
         Description
       </div>
+  
       <div
-        class="col-1 font-weight-bold p-3 mb-2 bg-secondary text-white text-left"
-      ></div>
-      <div
-        class="col-1 font-weight-bold p-3 mb-2 bg-secondary text-white text-left"
-      >
-        Rate
-      </div>
-      <div
-        class="col-1 font-weight-bold p-3 mb-2 bg-secondary text-white text-left"
-      ></div>
-      <div
-        class="col-2 font-weight-bold p-3 mb-2 bg-secondary text-white text-center"
+        class="col-4 font-weight-bold p-3 mb-2 bg-secondary text-white text-center"
       >
         Actions
       </div>
+      
     </div>
     <br />
     <div :key="index" v-for="(task, index) in tasks">
@@ -56,18 +47,10 @@
               />
             </div>
           </div>
-          <div class="col-1 text-left border-bottom"></div>
+          <!-- <div class="col-1 text-left border-bottom"></div> -->
           <div class="col-1 text-left border-bottom">
             <div v-if="isEditing == false">
-              {{ task.rate }}
             </div>
-            <input
-              v-else
-              v-model="task.rate"
-              type="number"
-              placeholder="Rate"
-              size="5"
-            /><br />
           </div>
           <div class="col-1 text-left border-bottom"></div>
           <div class="col-1 text-left border-bottom">
@@ -101,6 +84,7 @@
               Delete
             </button>
           </div>
+          <div class="col-1 text-left border-bottom"></div>
         </div>
         <br />
       </div>
