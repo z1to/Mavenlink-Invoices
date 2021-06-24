@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="pb-2 mt-4 mb-2 border-bottom">
-      <h1>Task Editor</h1>
+      <h1>Task Editor (Beta)</h1>
     </div>
     <br />
     <div>
@@ -29,7 +29,7 @@
             /><br />
           </form>
           <form action="">
-            <label for="">Rate: &nbsp; &nbsp; </label>
+            <!-- <label for="">Rate: &nbsp; &nbsp; </label>
             <input
               v-model="newTaskRate"
               type="number"
@@ -37,7 +37,8 @@
               name="trate"
               placeholder="New Rate"
               size="10"
-            /><br />
+            /><br /> -->
+            <!--Future Implementation -->
           </form>
           <button
             @click="
